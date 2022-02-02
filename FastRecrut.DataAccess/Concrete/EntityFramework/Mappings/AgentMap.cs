@@ -23,6 +23,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
             builder.HasKey(a => a.Id);
+            builder.Property(a => a.Id).UseIdentityColumn();
             builder.Property(a => a.Civility).IsRequired();
             builder.Property(a => a.Civility).HasMaxLength(5);
             builder.Property(a => a.Lastname).IsRequired();
@@ -31,6 +32,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
             builder.Property(a => a.Firstname).HasMaxLength(50);
             builder.Property(a => a.Phone).IsRequired();
             builder.Property(a => a.Phone).HasMaxLength(10);
+            builder.ToTable("Agents");
             builder.HasData(
                 new Agent
                 {

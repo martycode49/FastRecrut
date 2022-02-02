@@ -15,49 +15,56 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
         protected readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Task AddAsync(TEntity entity)
+        public EfEntityRepositoryBase(TContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _dbSet = context.Set<TEntity>();
         }
 
-        public Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task AddAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddAsync(entity);
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddRangeAsync(entities);
         }
 
-        public Task<TEntity> GetByIdAsync(int id)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
         }
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(entities);
         }
 
-        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _dbSet.SingleOrDefaultAsync(predicate);
         }
 
         public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            return entity;
         }
 
-        public Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _dbSet.Where(predicate).ToListAsync();
         }
     }
 }
