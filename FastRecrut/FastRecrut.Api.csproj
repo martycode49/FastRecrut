@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FastRecrut.Business\FastRecrut.Business.csproj" />
     <ProjectReference Include="..\FastRecrut.DataAccess\FastRecrut.DataAccess.csproj" />
   </ItemGroup>
 

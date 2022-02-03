@@ -5,25 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using FastRecrut.Core.Entities.Abstract;
 
-namespace FastRecrut.Entities.Concrete
+namespace FastRecrut.Entities.Dtos
 {
-    public class Participant : IEntity
+    public class ParticipantDetailDto : IDto
     {
-        public Participant()
-        {
-            this.ParticipantDatas = new HashSet<ParticipantData>();
-        }
-
         public int Id { get; set; }
         public string Lastname { get; set; }
         public string Firstname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public System.DateTime LastLogin { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public bool Status { get; set; }
-
-        public virtual ICollection<ParticipantData> ParticipantDatas { get; set; }
     }
 }

@@ -4,26 +4,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
 {
-    public class AgentMap : IEntityTypeConfiguration<Agent>
+    public class ParticipantMap : IEntityTypeConfiguration<Participant>
     {
-        /* 
+        /*
         public int Id { get; set; }
-        public string Civility { get; set; }
         public string Lastname { get; set; }
         public string Firstname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public System.DateTime LastLogin { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool Status { get; set; }
          */
-        public void Configure(EntityTypeBuilder<Agent> builder)
+        public void Configure(EntityTypeBuilder<Participant> builder)
         {
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id).UseIdentityColumn();
-            builder.Property(a => a.Civility).IsRequired();
-            builder.Property(a => a.Civility).HasMaxLength(5);
             builder.Property(a => a.Lastname).IsRequired();
             builder.Property(a => a.Lastname).HasMaxLength(50);
             builder.Property(a => a.Firstname).IsRequired();
@@ -34,62 +31,52 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
             builder.Property(a => a.Phone).HasMaxLength(10);
             builder.Property(a => a.PasswordSalt).IsRequired();
             builder.Property(a => a.PasswordHash).IsRequired();
-            builder.ToTable("Agents");
+            builder.ToTable("Participants");
             builder.HasData(
-                new Agent
+                new Participant
                 {
                     Id = 1,
-                    Civility = "M.",
                     Firstname = "Matt",
                     Lastname = "LeBlanc",
                     Phone = "0102030405",
                     Email = "m.leblanc@exemple.com",
-                    IsActive = true,
-                    IsAdmin = true,
+                    Status = true,
                 },
-                new Agent
+                new Participant
                 {
                     Id = 2,
-                    Civility = "M.",
                     Firstname = "Matthew",
                     Lastname = "Perry",
                     Phone = "0102030405",
                     Email = "m.perry@exemple.com",
-                    IsActive = true,
-                    IsAdmin = true,
+                    Status = true,
                 },
-                new Agent
+                new Participant
                 {
                     Id = 3,
-                    Civility = "M.",
                     Firstname = "Courteney",
                     Lastname = "Cox",
                     Phone = "0102030405",
                     Email = "c.cox@exemple.com",
-                    IsActive = true,
-                    IsAdmin = false,
+                    Status = true,
                 },
-                new Agent
+                new Participant
                 {
                     Id = 4,
-                    Civility = "M.",
                     Firstname = "Neil Patrick",
                     Lastname = "Harris",
                     Phone = "0102030405",
                     Email = "np.harris@exemple.com",
-                    IsActive = true,
-                    IsAdmin = false,
+                    Status = true,
                 },
-                new Agent
+                new Participant
                 {
                     Id = 5,
-                    Civility = "M.",
                     Firstname = "Wentworth",
                     Lastname = "Miller",
                     Phone = "0102030405",
                     Email = "w.miller@exemple.com",
-                    IsActive = true,
-                    IsAdmin = false,
+                    Status = true,
                 }
             );
         }

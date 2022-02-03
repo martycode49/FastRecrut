@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FastRecrut.Core.DataAccess.Abstract
 {
-    interface IEntityRepository<TEntity> where TEntity:class
+    public interface IEntityRepository<TEntity> where TEntity:class
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
@@ -16,5 +16,6 @@ namespace FastRecrut.Core.DataAccess.Abstract
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
         TEntity Update(TEntity entity);
+        TEntity Get(Expression<Func<TEntity, bool>> filter);
     }
 }

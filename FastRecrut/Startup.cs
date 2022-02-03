@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FastRecrut.Business.Services.Abstract;
+using FastRecrut.Business.Services.Concrete;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.DataAccess.Concrete;
 using FastRecrut.DataAccess.Concrete.EntityFramework.Contexts;
@@ -32,6 +34,11 @@ namespace FastRecrut
 
             // Ajouter les services auto Mapper, DI interfaces Repository, Services, UoW
             // AddScoped : chaque services gère une instance de UoW
+
+            // Services 
+            services.AddTransient<IAgentService, AgentManager>();
+            //services.AddTransient<IParticipantService, ParticipantManager>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Configuration pour SQL Server
             services.AddDbContext<FastRecrutDbContext>(options =>

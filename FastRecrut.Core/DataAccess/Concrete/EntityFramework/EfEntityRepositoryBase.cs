@@ -21,6 +21,7 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
             _dbSet = context.Set<TEntity>();
         }
 
+
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
@@ -30,6 +31,13 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
         {
             await _dbSet.AddRangeAsync(entities);
         }
+
+
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            return _dbSet.SingleOrDefault(filter);
+        }
+
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
