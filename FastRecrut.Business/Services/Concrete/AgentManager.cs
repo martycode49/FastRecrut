@@ -24,53 +24,30 @@ namespace FastRecrut.Business.Services.Concrete
         }
 
         //[CacheAspect]
-        public Task<List<OperationClaim>> GetClaims(Agent agent)
+        public List<OperationClaim> GetClaims(Agent agent)
         {
             return _agentDal.GetClaims(agent);
         }
 
-        public IResult Add(Agent agent)
+        public void ADD(Agent agent)
         {
-            _agentDal.AddAsync(agent);
-            return new SuccessResult(Messages.UserAdded);
+            _agentDal.Add(agent);
         }
-
-        public IResult Delete(Agent agent)
+        
+        public Agent GetByMail(string email)
         {
-            _agentDal.Remove(agent);
-            return new SuccessResult(Messages.UserDeleted);
-        }
-
-        public IDataResult<List<AgentDetailDto>> GetAgentDetailById(int agentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<AgentDetailDto>> GetAgentDetails()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<Task<List<Agent>>> GetAll()
-        {
-            var getAll = _agentDal.GetAll();
-            return new SuccessDataResult<List<Agent>>(getAll);
-        }
-
-        public IDataResult<AgentDetailDto> GetByEmail(string email)
-        {
-            return _userDal.Get(u => u.Email == email);
+            return _agentDal.Get(u => u.Email == email);
         }
 
         public IDataResult<Agent> GetById(int id)
         {
-            return new SuccessDataResult<Agent>(_agentDal.Where(user => user.Id == id));
+            return new SuccessDataResult<Agent>(_agentDal.Get(user => user.Id == id));
         }
 
-        public IDataResult<Agent> GetLastUser()
+        public IResult Add(Agent agent)
         {
-            var lastUser = _agentDal.GetAllAsync().LastOrDefault();
-            return new SuccessDataResult<Agent>(lastUser);
+            _agentDal.Add(agent);
+            return new SuccessResult(Messages.UserAdded);
         }
 
         public IResult Update(Agent agent)
@@ -79,7 +56,39 @@ namespace FastRecrut.Business.Services.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public void ADD(Agent agent)
+        public IResult Delete(Agent agent)
+        {
+            _agentDal.Delete(agent);
+            return new SuccessResult(Messages.UserDeleted);
+        }
+
+        public IDataResult<Agent> GetLastUser()
+        {
+            var lastUser = _agentDal.GetAll().LastOrDefault();
+            return new SuccessDataResult<Agent>(lastUser);
+        }
+
+        IDataResult<List<Agent>> IAgentService.GetAll()
+        {
+            var getAll = _agentDal.GetAll();
+            return new SuccessDataResult<List<Agent>>(getAll);
+        }
+
+
+        // Used for Dtos
+
+
+        public AgentDetailDto GetByEmailDto(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<AgentDetailDto> IAgentService.GetAgentDetails()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<AgentDetailDto> IAgentService.GetAgentDetailById(int agentId)
         {
             throw new NotImplementedException();
         }

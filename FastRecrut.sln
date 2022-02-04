@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Api", "FastRecrut\FastRecrut.Api.csproj", "{E063F7EE-A717-4E23-B9D5-D73C2D89AE4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8628971C-53E0-4848-BBD2-647DDD70F6A9} = {8628971C-53E0-4848-BBD2-647DDD70F6A9}
+		{E64612A1-0E0C-4A32-9171-170965E0EDD5} = {E64612A1-0E0C-4A32-9171-170965E0EDD5}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Core", "FastRecrut.Core\FastRecrut.Core.csproj", "{8628971C-53E0-4848-BBD2-647DDD70F6A9}"
 EndProject
@@ -11,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Entities", "Fast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.DataAccess", "FastRecrut.DataAccess\FastRecrut.DataAccess.csproj", "{B3B3239C-20FE-48D8-AE8C-485E133F31B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastRecrut.Business", "FastRecrut.Business\FastRecrut.Business.csproj", "{FAD5A4B5-4334-4F2F-9F60-5E20F3A436D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Business", "FastRecrut.Business\FastRecrut.Business.csproj", "{FAD5A4B5-4334-4F2F-9F60-5E20F3A436D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

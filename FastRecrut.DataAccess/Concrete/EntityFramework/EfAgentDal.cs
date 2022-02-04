@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FastRecrut.Core.DataAccess.Concrete.EntityFramework;
@@ -36,6 +37,34 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             return await result.ToListAsync();
         }
 
+        List<OperationClaim> IAgentDal.GetClaims(Agent agent)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Agent Get(Expression<Func<Agent, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Agent> GetAll(Expression<Func<Agent, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Agent entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Agent entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Agent entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

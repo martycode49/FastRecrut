@@ -21,58 +21,35 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
             _dbSet = context.Set<TEntity>();
         }
 
-
-        public async Task AddAsync(TEntity entity)
+        public void Add(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            var addedEntity = _context.Entry(entity);
+            addedEntity.State = EntityState.Added;
+            _context.SaveChanges();
         }
 
-        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public void Delete(TEntity entity)
         {
-            await _dbSet.AddRangeAsync(entities);
+            var deletedEntity = _context.Entry(entity);
+            deletedEntity.State = EntityState.Deleted;
+            _context.SaveChanges();
         }
-
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            return _dbSet.SingleOrDefault(filter);
+            return _context.Set<TEntity>().SingleOrDefault(filter);
         }
 
-
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            return await _dbSet.ToListAsync();
+            return filter == null ? _context.Set<TEntity>().ToList() : _context.Set<TEntity>().Where(filter).ToList();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public void Update(TEntity entity)
         {
-            return await _dbSet.FindAsync(id);
-        }
-
-        public void Remove(TEntity entity)
-        {
-            _dbSet.Remove(entity);
-        }
-
-        public void RemoveRange(IEnumerable<TEntity> entities)
-        {
-            _dbSet.RemoveRange(entities);
-        }
-
-        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.SingleOrDefaultAsync(predicate);
-        }
-
-        public TEntity Update(TEntity entity)
-        {
-            _context.Entry(entity).State = EntityState.Modified;
-            return entity;
-        }
-
-        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.Where(predicate).ToListAsync();
+            var updatedEntity = _context.Entry(entity);
+            updatedEntity.State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

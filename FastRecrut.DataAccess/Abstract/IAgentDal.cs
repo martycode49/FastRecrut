@@ -12,6 +12,6 @@ namespace FastRecrut.DataAccess.Abstract
     public interface IAgentDal: IEntityRepository<Agent>
     {
         // contrats spécifiques pour Agent
-        Task<List<OperationClaim>> GetClaims(Agent agent); // login Management
+        List<OperationClaim> GetClaims(Agent agent); // login Management
     }
 }
