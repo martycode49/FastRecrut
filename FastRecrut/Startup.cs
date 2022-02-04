@@ -31,6 +31,8 @@ namespace FastRecrut
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen();
 
             // Ajouter les services auto Mapper, DI interfaces Repository, Services, UoW
             // AddScoped : chaque services gère une instance de UoW
@@ -49,7 +51,7 @@ namespace FastRecrut
                 });
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +72,11 @@ namespace FastRecrut
             {
                 endpoints.MapControllers();
             });
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+            app.UseSwaggerUI();
         }
     }
 }
