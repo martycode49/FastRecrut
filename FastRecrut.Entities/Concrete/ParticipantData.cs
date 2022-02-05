@@ -21,7 +21,7 @@ namespace FastRecrut.Entities.Concrete
         public Nullable<bool> QuizValidFreeAnswer { get; set; }
 
         public virtual AgentParticipant AgentParticipants { get; set; }
-        public virtual Participant Participants { get; set; }
+        public virtual Agent Agents { get; set; }
         public virtual Quiz Quizzes { get; set; }
     }
 }

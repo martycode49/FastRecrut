@@ -11,7 +11,6 @@ namespace FastRecrut.DataAccess.Concrete
     {
         public IAgentDal AgentDal => throw new NotImplementedException();
 
-        public IParticipantDal ParticipantDal => throw new NotImplementedException();
 
         public IAgentParticipantDal AgentParticipantDal => throw new NotImplementedException();
 

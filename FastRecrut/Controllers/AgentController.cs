@@ -19,30 +19,7 @@ namespace FastRecrut.Api.Controllers
             _agentService = agentService;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var result = _agentService.GetAll();
 
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
-
-        [HttpGet("getbyid")]
-
-        public IActionResult GetById(int id)
-        {
-            var result = _agentService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
 
         [HttpPost("add")]
 
@@ -57,30 +34,7 @@ namespace FastRecrut.Api.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
 
-        public IActionResult Delete(Agent agent)
-        {
-            var result = _agentService.Delete(agent);
 
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPost("update")]
-
-        public IActionResult Update(Agent agent)
-        {
-            var result = _agentService.Update(agent);
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
     }
 }

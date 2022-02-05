@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FastRecrut.Core.Entities.Concrete;
 using FastRecrut.Entities.Concrete;
 using FastRecrut.Core.DataAccess.Abstract;
 
@@ -12,6 +11,12 @@ namespace FastRecrut.DataAccess.Abstract
     public interface IAgentDal: IEntityRepository<Agent>
     {
         // contrats spécifiques pour Agent
-        List<OperationClaim> GetClaims(Agent agent); // login Management
+        
+        // login Management
+        Task<Agent> Authenticate(string username, string password);
+        Task<Agent> Create(Agent agent, string password);
+        void Update(Agent agent, string password = null);
+        Task<IEnumerable<Agent>> GetAllAgentAsync();
+        Task<Agent> GetWithAgentsByIdAsync(int id);
     }
 }

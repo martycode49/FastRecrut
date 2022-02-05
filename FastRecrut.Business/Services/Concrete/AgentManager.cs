@@ -7,7 +7,6 @@ using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using FastRecrut.Business.Services.Abstract;
-using FastRecrut.Core.Entities.Concrete;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.Entities.Concrete;
 using FastRecrut.Entities.Dtos;
@@ -23,11 +22,6 @@ namespace FastRecrut.Business.Services.Concrete
             _agentDal = agentDal;
         }
 
-        //[CacheAspect]
-        public List<OperationClaim> GetClaims(Agent agent)
-        {
-            return _agentDal.GetClaims(agent);
-        }
 
         public void ADD(Agent agent)
         {
@@ -68,11 +62,6 @@ namespace FastRecrut.Business.Services.Concrete
             return new SuccessDataResult<Agent>(lastUser);
         }
 
-        IDataResult<List<Agent>> IAgentService.GetAll()
-        {
-            var getAll = _agentDal.GetAll();
-            return new SuccessDataResult<List<Agent>>(getAll);
-        }
 
 
         // Used for Dtos
@@ -92,5 +81,36 @@ namespace FastRecrut.Business.Services.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public Task<Agent> Authenticate(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Agent>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Agent> IAgentService.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Agent> Create(Agent agent, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Agent agent, string password = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

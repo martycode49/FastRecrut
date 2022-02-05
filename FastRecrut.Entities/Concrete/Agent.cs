@@ -22,9 +22,12 @@ namespace FastRecrut.Entities.Concrete
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime LastLogin { get; set; }
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
-        
+        public string Status { get; set; }
+
 
         public virtual ICollection<AgentParticipant> AgentParticipants { get; set; }
     }
