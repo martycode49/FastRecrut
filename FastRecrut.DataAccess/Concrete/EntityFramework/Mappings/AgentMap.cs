@@ -15,8 +15,12 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime LastLogin { get; set; }
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
+        public string Status { get; set; }
+
          */
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
@@ -32,8 +36,6 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
             builder.Property(a => a.Email).IsRequired();
             builder.Property(a => a.Phone).IsRequired();
             builder.Property(a => a.Phone).HasMaxLength(10);
-            builder.Property(a => a.PasswordSalt).IsRequired();
-            builder.Property(a => a.PasswordHash).IsRequired();
             builder.ToTable("Agents");
             builder.HasData(
                 new Agent
@@ -46,6 +48,9 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Email = "m.leblanc@exemple.com",
                     IsActive = true,
                     IsAdmin = true,
+                    CreatedAt = System.DateTime.Now,
+                    LastLogin = System.DateTime.Now,
+                    Status = "Agent"
                 },
                 new Agent
                 {
@@ -57,6 +62,9 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Email = "m.perry@exemple.com",
                     IsActive = true,
                     IsAdmin = true,
+                    CreatedAt = System.DateTime.Now,
+                    LastLogin = System.DateTime.Now,
+                    Status = "Agent"
                 },
                 new Agent
                 {
@@ -68,6 +76,9 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Email = "c.cox@exemple.com",
                     IsActive = true,
                     IsAdmin = false,
+                    CreatedAt = System.DateTime.Now,
+                    LastLogin = System.DateTime.Now,
+                    Status = "Agent"
                 },
                 new Agent
                 {
@@ -79,6 +90,9 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Email = "np.harris@exemple.com",
                     IsActive = true,
                     IsAdmin = false,
+                    CreatedAt = System.DateTime.Now,
+                    LastLogin = System.DateTime.Now,
+                    Status = "Agent"
                 },
                 new Agent
                 {
@@ -90,8 +104,11 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Email = "w.miller@exemple.com",
                     IsActive = true,
                     IsAdmin = false,
+                    CreatedAt = System.DateTime.Now,
+                    LastLogin = System.DateTime.Now,
+                    Status = "Agent"
                 }
-            );
+            ) ;
         }
     }
 }

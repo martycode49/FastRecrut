@@ -10,6 +10,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Contexts
         {
         }
 
+
         public DbSet<Agent> Agents { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<AgentParticipant> AgentParticipants { get; set; }

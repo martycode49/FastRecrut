@@ -1,11 +1,11 @@
+using System.Text;
+using System.Threading.Tasks;
 using FastRecrut.Business.Services.Abstract;
 using FastRecrut.Business.Services.Concrete;
-using FastRecrut.Core.DataAccess.Abstract;
-using FastRecrut.Core.DataAccess.Concrete.EntityFramework;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.DataAccess.Concrete;
 using FastRecrut.DataAccess.Concrete.EntityFramework.Contexts;
-using FastRecrut.Entities.Concrete;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace FastRecrut
 {
@@ -28,21 +30,11 @@ namespace FastRecrut
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json
+                .ReferenceLoopHandling.Ignore
+               );
 
-            // Ajouter les services auto Mapper, DI interfaces Repository, Services, UoW
-            // AddScoped : chaque services gère une instance de UoW
-            services.AddScoped(typeof(IEntityRepository<Agent>), typeof(EfEntityRepositoryBase<Agent, FastRecrutDbContext>));
-            services.AddScoped(typeof(IEntityRepository<ParticipantData>), typeof(EfEntityRepositoryBase<ParticipantData, FastRecrutDbContext>));
-            services.AddScoped(typeof(IEntityRepository<Quiz>), typeof(EfEntityRepositoryBase<Quiz, FastRecrutDbContext>));
-            services.AddScoped(typeof(IEntityRepository<AgentParticipant>), typeof(EfEntityRepositoryBase<AgentParticipant, FastRecrutDbContext>));
-
-            // Services 
-            services.AddScoped<IAgentService, AgentManager>();
-            //services.AddTransient<IParticipantService, ParticipantManager>();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Configuration pour SQL Server
             services.AddDbContext<FastRecrutDbContext>(options =>
             {
@@ -51,8 +43,58 @@ namespace FastRecrut
                     o.MigrationsAssembly("FastRecrut.DataAccess");
                 });
             });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddControllers().AddNewtonsoftJson();
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                { Title = "Put title here", Description = "DotNet Core Api 3 - with swagger" });
+            });
+
+            // Auto Mapper
+            
+
+            // AddScoped : chaque services gère une instance de UoW
+
+
+            // Services 
+            services.AddTransient<IAgentService, AgentManager>();
+
+            //Jwt
+            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IAgentService>();
+                        var userId = int.Parse(context.Principal.Identity.Name);
+                        var user = userService.GetById(userId);
+                        if (user == null)
+                        {
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -72,6 +114,8 @@ namespace FastRecrut
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -82,7 +126,11 @@ namespace FastRecrut
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FastRecrut V1");
+            });
         }
     }
 }

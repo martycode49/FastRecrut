@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace FastRecrut.Entities.Concrete
         }
 
         public int Id { get; set; }
+        [ForeignKey("Agent")]
         public int IdAgent { get; set; }
         public Nullable<System.DateTime> datecreate { get; set; }
         public int QuestionQty { get; set; }

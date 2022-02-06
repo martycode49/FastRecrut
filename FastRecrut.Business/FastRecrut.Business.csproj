@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FastRecrut.Core\FastRecrut.Core.csproj" />
     <ProjectReference Include="..\FastRecrut.DataAccess\FastRecrut.DataAccess.csproj" />
     <ProjectReference Include="..\FastRecrut.Entities\FastRecrut.Entities.csproj" />
   </ItemGroup>

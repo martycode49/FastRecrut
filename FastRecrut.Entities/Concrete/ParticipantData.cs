@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,11 @@ namespace FastRecrut.Entities.Concrete
     public class ParticipantData : IEntity
     {
         public int Id { get; set; }
+        [ForeignKey("AgentParticipant")]
         public int QuizId { get; set; }
+        [ForeignKey("Quiz")]
         public int QuizQuestionId { get; set; }
+        [ForeignKey("Agent")]
         public int QuizParticipId { get; set; }
         public int QuizValidAnswer { get; set; }
         public Nullable<System.DateTime> QuizQstart { get; set; }
