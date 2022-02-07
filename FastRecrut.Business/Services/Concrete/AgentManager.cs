@@ -16,10 +16,12 @@ namespace FastRecrut.Business.Services.Concrete
     public class AgentManager : IAgentService
     {
         IAgentDal _agentDal;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AgentManager(IAgentDal agentDal)
+        public AgentManager(IAgentDal agentDal, IUnitOfWork unitOfWork)
         {
             _agentDal = agentDal;
+            _unitOfWork = unitOfWork;
         }
 
 
@@ -87,9 +89,9 @@ namespace FastRecrut.Business.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Agent>> GetAll()
+        public async Task<IEnumerable<Agent>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.AgentDal.GetAllAgentAsync();
         }
 
         Task<Agent> IAgentService.GetById(int id)

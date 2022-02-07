@@ -4,6 +4,7 @@ using FastRecrut.Business.Services.Abstract;
 using FastRecrut.Business.Services.Concrete;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.DataAccess.Concrete;
+using FastRecrut.DataAccess.Concrete.EntityFramework;
 using FastRecrut.DataAccess.Concrete.EntityFramework.Contexts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -49,17 +50,18 @@ namespace FastRecrut
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
-                { Title = "Put title here", Description = "DotNet Core Api 3 - with swagger" });
+                { Title = "Fast Recruitment API", Description = "DotNet Core Api - with swagger" });
             });
 
             // Auto Mapper
-            
+            services.AddAutoMapper(typeof(Startup));
 
             // AddScoped : chaque services gère une instance de UoW
 
 
             // Services 
             services.AddTransient<IAgentService, AgentManager>();
+            services.AddTransient<IAgentDal, EfAgentDal>();
 
             //Jwt
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));
@@ -126,11 +128,7 @@ namespace FastRecrut
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
-            app.UseSwaggerUI(c =>
-            {
-                c.RoutePrefix = "";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FastRecrut V1");
-            });
+            app.UseSwaggerUI();
         }
     }
 }
