@@ -18,5 +18,6 @@ namespace FastRecrut.DataAccess.Abstract
         void Update(Agent agent, string password = null);
         Task<IEnumerable<Agent>> GetAllAgentAsync();
         Task<Agent> GetWithAgentsByIdAsync(int id);
+        void Delete(int id);
     }
 }

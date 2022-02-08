@@ -162,5 +162,14 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
 
             _FastRecrutDbContext.Agents.Update(user);
         }
+
+        public void Delete(int id)
+        {
+            var user = _FastRecrutDbContext.Agents.Find(id);
+            if (user != null)
+            {
+                _FastRecrutDbContext.Agents.Remove(user);
+            }
+        }
     }
 }

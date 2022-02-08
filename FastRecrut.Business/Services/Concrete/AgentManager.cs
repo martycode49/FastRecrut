@@ -64,7 +64,41 @@ namespace FastRecrut.Business.Services.Concrete
             return new SuccessDataResult<Agent>(lastUser);
         }
 
+        // Used for By MyMusic project
+        public async Task<Agent> Authenticate(string username, string password)
+        {
+            return await _unitOfWork.AgentDal.Authenticate(username, password);
+        }
 
+        public async Task<IEnumerable<Agent>> GetAll()
+        {
+            return await _unitOfWork.AgentDal.GetAllAgentAsync();
+        }
+
+        public async Task<Agent> Create(Agent agent, string password)
+        {
+            await _unitOfWork.AgentDal.Create(agent, password);
+
+            await _unitOfWork.CommitAsync();
+            return agent;
+        }
+
+        public void Delete(int id)
+        {
+            _unitOfWork.AgentDal.Delete(id);
+            _unitOfWork.CommitAsync();
+        }
+
+        public void Update(Agent agent, string password = null)
+        {
+            _unitOfWork.AgentDal.Update(agent, password);
+            _unitOfWork.CommitAsync();
+        }
+
+        async Task<Agent> IAgentService.GetByIdAgent(int id)
+        {
+            return await _unitOfWork.AgentDal.GetWithAgentsByIdAsync(id);
+        }
 
         // Used for Dtos
 
@@ -83,36 +117,5 @@ namespace FastRecrut.Business.Services.Concrete
         {
             throw new NotImplementedException();
         }
-
-        public Task<Agent> Authenticate(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Agent>> GetAll()
-        {
-            return await _unitOfWork.AgentDal.GetAllAgentAsync();
-        }
-
-        Task<Agent> IAgentService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Agent> Create(Agent agent, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Agent agent, string password = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

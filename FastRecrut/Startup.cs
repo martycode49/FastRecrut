@@ -77,7 +77,7 @@ namespace FastRecrut
                     {
                         var userService = context.HttpContext.RequestServices.GetRequiredService<IAgentService>();
                         var userId = int.Parse(context.Principal.Identity.Name);
-                        var user = userService.GetById(userId);
+                        var user = userService.GetByIdAgent(userId);
                         if (user == null)
                         {
                             // return unauthorized if user no longer exists

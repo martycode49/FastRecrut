@@ -102,6 +102,35 @@ namespace FastRecrut.Api.Controllers
             return Ok(agentResources);
         }
 
+        // Update Agent
+        /*[HttpPut("")]
+        public async Task<ActionResult<AgentResource>> UpdateAgent(int id, SaveAgentResource saveAgentResource)
+        {
+            // validation
+            var validation = new SaveUserResourceValidation();
+            var validationResult = await validation.ValidateAsync(saveAgentResource);
+            if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
+            // Get agent by ID
+            var agentUpdate = await _agentService.GetByIdAgent(id);
+            if (agentUpdate == null) return NotFound();
+            //mappage
+            var agent = _mapper.Map<SaveAgentResource, Agent>(saveAgentResource);
+            // update Agent
+            await _agentService.Update(agentUpdate, agent);
+            //get agent By id
+            var agentNew = await _agentService.GetByIdAgent(id);
+            /// mappage
+            var artisrNewResource = _mapper.Map<Agent, AgentResource>(agentNew);
+
+            return Ok(artisrNewResource);
+        }*/
+        // Create Agent
+
+        // Delete Agent
+
+        // Get by id Agent
+
+
 
     }
 }

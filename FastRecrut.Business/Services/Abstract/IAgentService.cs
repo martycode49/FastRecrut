@@ -18,7 +18,7 @@ namespace FastRecrut.Business.Services.Abstract
         // Login Management
         Task<Agent> Authenticate(string username, string password);
         Task<IEnumerable<Agent>> GetAll();
-        Task<Agent> GetById(int id);
+        Task<Agent> GetByIdAgent(int id);
         Task<Agent> Create(Agent agent, string password);
         void Update(Agent agent, string password = null);
         void Delete(int id);
