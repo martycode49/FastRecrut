@@ -9,6 +9,7 @@ namespace FastRecrut.DataAccess.Abstract
     public interface IUnitOfWork
     {
         IAgentDal AgentDal { get; }
+        IRoleDal RoleDal { get; }
 
         //IAgentParticipantDal AgentParticipantDal { get; }
         

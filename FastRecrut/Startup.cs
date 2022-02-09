@@ -62,6 +62,8 @@ namespace FastRecrut
             // Services 
             services.AddTransient<IAgentService, AgentManager>();
             services.AddTransient<IAgentDal, EfAgentDal>();
+            services.AddTransient<IRoleService, RoleManager>();
+            services.AddTransient<IRoleDal, EfRoleDal>();
 
             //Jwt
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));

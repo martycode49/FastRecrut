@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FastRecrut.DataAccess.Migrations
 {
     [DbContext(typeof(FastRecrutDbContext))]
-    [Migration("20220208184446_AddRoleDb")]
+    [Migration("20220208185832_AddRoleDb")]
     partial class AddRoleDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,12 +85,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 1,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 8, 19, 44, 45, 465, DateTimeKind.Local).AddTicks(9470),
+                            CreatedAt = new DateTime(2022, 2, 8, 19, 58, 31, 304, DateTimeKind.Local).AddTicks(1232),
                             Email = "m.leblanc@exemple.com",
                             Firstname = "Matt",
                             IsActive = true,
                             IsAdmin = true,
-                            LastLogin = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(2172),
+                            LastLogin = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(5283),
                             Lastname = "LeBlanc",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -99,12 +99,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 2,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4044),
+                            CreatedAt = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6676),
                             Email = "m.perry@exemple.com",
                             Firstname = "Matthew",
                             IsActive = true,
                             IsAdmin = true,
-                            LastLogin = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4077),
+                            LastLogin = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6698),
                             Lastname = "Perry",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -113,12 +113,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 3,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4088),
+                            CreatedAt = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6704),
                             Email = "c.cox@exemple.com",
                             Firstname = "Courteney",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4096),
+                            LastLogin = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6707),
                             Lastname = "Cox",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -127,12 +127,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 4,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4105),
+                            CreatedAt = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6712),
                             Email = "np.harris@exemple.com",
                             Firstname = "Neil Patrick",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4112),
+                            LastLogin = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6716),
                             Lastname = "Harris",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -141,12 +141,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 5,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4122),
+                            CreatedAt = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6721),
                             Email = "w.miller@exemple.com",
                             Firstname = "Wentworth",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 8, 19, 44, 45, 473, DateTimeKind.Local).AddTicks(4128),
+                            LastLogin = new DateTime(2022, 2, 8, 19, 58, 31, 309, DateTimeKind.Local).AddTicks(6724),
                             Lastname = "Miller",
                             Phone = "0102030405",
                             Status = "Agent"

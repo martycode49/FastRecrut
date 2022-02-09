@@ -13,6 +13,7 @@ namespace FastRecrut.DataAccess.Concrete
     {
         private readonly FastRecrutDbContext _context;
         private IAgentDal _agentDal;
+        private IRoleDal _roleDal;
         //private IAgentParticipantDal _AgentParticipantDal;
         //private IParticipantDataDal _ParticipantDataDal;
         //private IQuizDal _QuizDal;
@@ -24,6 +25,7 @@ namespace FastRecrut.DataAccess.Concrete
 
         public IAgentDal AgentDal =>  _agentDal = _agentDal ?? new EfAgentDal(_context);
 
+        public IRoleDal RoleDal => _roleDal = _roleDal ?? new EfRoleDal(_context);
 
         //public IAgentParticipantDal AgentParticipantDal => _AgentParticipantDal = _AgentParticipantDal ?? new EfAgentParticipantDal(_context);
 

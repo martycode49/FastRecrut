@@ -21,12 +21,14 @@ namespace FastRecrut.Api.Controllers
     public class AgentController : ControllerBase
     {
         private readonly IAgentService _agentService;
+        private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
         private readonly Microsoft.Extensions.Configuration.IConfiguration _config;
 
-        public AgentController(IAgentService agentService, IMapper mapper, Microsoft.Extensions.Configuration.IConfiguration config)
+        public AgentController(IAgentService agentService, IRoleService roleService, IMapper mapper, Microsoft.Extensions.Configuration.IConfiguration config)
         {
             _agentService = agentService;
+            _roleService = roleService;
             _mapper = mapper;
             _config = config;
         }
@@ -35,6 +37,7 @@ namespace FastRecrut.Api.Controllers
         public async Task<IActionResult> Authenticate(AgentResource userResource)
         {
             var user = await _agentService.Authenticate(userResource.Email, userResource.Password);
+            //var role = await _roleService.GetRoleByIdUser(user.Id); // ajout Martial
             if (user == null) return BadRequest(new { message = "Username or password is incorrect" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -43,8 +46,10 @@ namespace FastRecrut.Api.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                  {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    //new Claim(ClaimTypes.Role, role.RoleName.ToString()),
                  }),
+                 // Ajout Martial
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -77,7 +82,7 @@ namespace FastRecrut.Api.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                  {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
                  }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

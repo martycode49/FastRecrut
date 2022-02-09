@@ -8,36 +8,24 @@ namespace FastRecrut.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AgentsId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Roles_Agents_AgentsId",
-                        column: x => x.AgentsId,
-                        principalTable: "Agents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "AgentsId", "RoleName", "UserId" },
-                values: new object[] { 1, null, "Admin", 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Roles_AgentsId",
-                table: "Roles",
-                column: "AgentsId");
+                 name: "Roles",
+                 columns: table => new
+                 {
+                     Id = table.Column<int>(type: "int", nullable: false)
+                         .Annotation("SqlServer:Identity", "1, 1"),
+                     UserId = table.Column<int>(type: "int", nullable: false),
+                     RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                 },
+                 constraints: table =>
+                 {
+                     table.PrimaryKey("PK_Roles", x => x.Id);
+                     table.ForeignKey(
+                         name: "FK_Roles_Agents_UserId",
+                         column: x => x.UserId,
+                         principalTable: "Agents",
+                         principalColumn: "Id",
+                         onDelete: ReferentialAction.Restrict);
+                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

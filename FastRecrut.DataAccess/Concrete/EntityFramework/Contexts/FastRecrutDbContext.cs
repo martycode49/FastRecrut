@@ -15,7 +15,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<AgentParticipant> AgentParticipants { get; set; }
         public DbSet<ParticipantData> ParticipantDatas { get; set; }
-        public DbSet<Role> roles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
