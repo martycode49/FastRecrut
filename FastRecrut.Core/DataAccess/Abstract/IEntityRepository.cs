@@ -7,7 +7,7 @@ namespace FastRecrut.Core.DataAccess.Abstract
 {
     public interface IEntityRepository<TEntity> where TEntity:class
     {
-        /*Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
@@ -15,11 +15,13 @@ namespace FastRecrut.Core.DataAccess.Abstract
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        TEntity Update(TEntity entity);*/
+        TEntity Update(TEntity entity);
+
+
+        // Eliminer en dessous
         TEntity Get(Expression<Func<TEntity, bool>> filter);
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
         void Add(TEntity entity);
-        void Update(TEntity entity);
         void Delete(TEntity entity);
     }
 }

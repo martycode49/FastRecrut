@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using FastRecrut.Core.DataAccess.Abstract;
 using FastRecrut.Core.DataAccess.Concrete.EntityFramework;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.DataAccess.Concrete.EntityFramework.Contexts;
@@ -22,32 +23,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         }
 
 
-        public Agent Get(Expression<Func<Agent, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Agent> GetAll(Expression<Func<Agent, bool>> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(Agent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Agent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Agent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Agent> Authenticate(string username, string password)
+        public async Task<Agent> Authenticate(string username, string password) // origine
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
@@ -67,7 +43,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             return user;
         }
 
-        public async Task<Agent> Create(Agent agent, string password)
+        public async Task<Agent> Create(Agent agent, string password) // origine
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
@@ -87,20 +63,20 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             return agent;
         }
 
-        public async Task<IEnumerable<Agent>> GetAllAgentAsync()
+        public async Task<IEnumerable<Agent>> GetAllAgentAsync() // origine
         {
             return await _FastRecrutDbContext.Agents
              .ToListAsync();
         }
 
-        public async Task<Agent> GetWithAgentsByIdAsync(int id)
+        public async Task<Agent> GetWithAgentsByIdAsync(int id) // origine
         {
             return await _FastRecrutDbContext.Agents
                     .Where(user => user.Id == id)
                     .FirstOrDefaultAsync();
         }
 
-        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt) // origine
         {
             if (password == null) throw new ArgumentNullException("password");
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
@@ -119,7 +95,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             return true;
         }
 
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) // origine
         {
             if (password == null) throw new ArgumentNullException("password");
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
@@ -131,7 +107,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Update(Agent agentParam, string password = null)
+        public void Update(Agent agentParam, string password = null) // origine
         {
             var user = _FastRecrutDbContext.Agents.Find(agentParam.Id);
 
@@ -163,7 +139,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
             _FastRecrutDbContext.Agents.Update(user);
         }
 
-        public void Delete(int id)
+        public void Delete(int id) // origine
         {
             var user = _FastRecrutDbContext.Agents.Find(id);
             if (user != null)

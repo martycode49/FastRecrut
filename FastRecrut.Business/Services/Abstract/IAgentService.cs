@@ -8,12 +8,9 @@ namespace FastRecrut.Business.Services.Abstract
 {
     public interface IAgentService
     {
-        void ADD(Agent agent);
-        Agent GetByMail(string email);
-        IDataResult<Agent> GetLastUser();
-        IResult Add(Agent agent);
-        //IResult Update(Agent agent);
-        //IResult Delete(Agent agent);
+        //void ADD(Agent agent);
+        //Agent GetByMail(string email);
+        //IResult Add(Agent agent);
 
         // Login Management
         Task<Agent> Authenticate(string username, string password);

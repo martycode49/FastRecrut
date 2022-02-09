@@ -8,7 +8,7 @@ using FastRecrut.Core.DataAccess.Abstract;
 
 namespace FastRecrut.DataAccess.Abstract
 {
-    public interface IAgentDal: IEntityRepository<Agent>
+    public interface IAgentDal
     {
         // contrats spécifiques pour Agent
         

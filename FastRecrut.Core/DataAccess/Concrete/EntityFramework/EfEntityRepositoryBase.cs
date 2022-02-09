@@ -14,42 +14,83 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
     {
         protected readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
-
         public EfEntityRepositoryBase(TContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        //**************************** supprimer en dessous
+        public void Add(TEntity entity) // suppr
         {
             var addedEntity = _context.Entry(entity);
             addedEntity.State = EntityState.Added;
             _context.SaveChanges();
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(TEntity entity) // suppr
         {
             var deletedEntity = _context.Entry(entity);
             deletedEntity.State = EntityState.Deleted;
             _context.SaveChanges();
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter) // suppr
         {
             return _context.Set<TEntity>().SingleOrDefault(filter);
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null) // suppr
         {
             return filter == null ? _context.Set<TEntity>().ToList() : _context.Set<TEntity>().Where(filter).ToList();
         }
 
-        public void Update(TEntity entity)
+        //**********************
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            var updatedEntity = _context.Entry(entity);
-            updatedEntity.State = EntityState.Modified;
-            _context.SaveChanges();
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+        public void Remove(TEntity entity)
+        {
+            _dbSet.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+        }
+
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbSet.SingleOrDefaultAsync(predicate);
+        }
+
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
+        }
+
+        TEntity IEntityRepository<TEntity>.Update(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            return entity;
+        }
+
+        public async Task AddAsync(TEntity entity)
+        {
+            await _dbSet.AddAsync(entity);
+        }
+
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
         }
     }
 }

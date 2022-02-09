@@ -2,10 +2,14 @@ using System.Text;
 using System.Threading.Tasks;
 using FastRecrut.Business.Services.Abstract;
 using FastRecrut.Business.Services.Concrete;
+using FastRecrut.Core.DataAccess.Abstract;
+using FastRecrut.Core.DataAccess.Concrete.EntityFramework;
+using FastRecrut.Core.Services.Abstract;
 using FastRecrut.DataAccess.Abstract;
 using FastRecrut.DataAccess.Concrete;
 using FastRecrut.DataAccess.Concrete.EntityFramework;
 using FastRecrut.DataAccess.Concrete.EntityFramework.Contexts;
+using FastRecrut.Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,7 +61,10 @@ namespace FastRecrut
             services.AddAutoMapper(typeof(Startup));
 
             // AddScoped : chaque services gère une instance de UoW
-
+            // ceci evite de redéfinir toutes les contrats d'interface (les méthodes sont définies dans EfEntityRepository<RepoName>)
+            services.AddScoped(typeof(IEntityRepository<Agent>), typeof(EfEntityRepositoryBase<Agent, FastRecrutDbContext>));
+            services.AddScoped(typeof(IEntityRepository<Role>), typeof(EfEntityRepositoryBase<Role, FastRecrutDbContext>));
+            services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
             services.AddTransient<IAgentService, AgentManager>();

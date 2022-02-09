@@ -19,6 +19,18 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                     Id = 1,
                     UserId = 1,
                     RoleName = "Admin"
+                },
+                new Role
+                {
+                    Id = 2,
+                    UserId = 11,
+                    RoleName = "Admin"
+                },
+                new Role
+                {
+                    Id = 3,
+                    UserId = 11,
+                    RoleName = "Agent"
                 });
         }
     }

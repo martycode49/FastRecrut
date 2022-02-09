@@ -17,5 +17,7 @@ namespace FastRecrut.DataAccess.Abstract
 
         //IQuizDal QuizDal { get; }
         Task<int> CommitAsync();
+
+        void Commit();
     }
 }

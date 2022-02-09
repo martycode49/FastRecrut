@@ -39,6 +39,11 @@ namespace FastRecrut.DataAccess.Concrete
             return await _context.SaveChangesAsync();
         }
 
+        public void Commit()
+        {
+            _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             _context.Dispose();
