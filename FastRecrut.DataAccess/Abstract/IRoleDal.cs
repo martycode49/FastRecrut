@@ -15,6 +15,6 @@ namespace FastRecrut.DataAccess.Abstract
         void Update(Role role);
         Task<Role> GetRoleByIdAsync(int id);
         void Delete(int id);
-        public async Task<List<Role>> GetAllRoleAsync();
+        public Task<List<Role>> GetAllRoleAsync();
     }
 }

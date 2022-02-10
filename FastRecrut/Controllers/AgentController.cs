@@ -39,16 +39,21 @@ namespace FastRecrut.Api.Controllers
         {
             var user = await _agentService.Authenticate(userResource.Email, userResource.Password);
             var role = await _roleService.GetRoleByIdUser(user.Id); // ajout Martial
-            if (user == null) return BadRequest(new { message = "Username or password is incorrect" });
+            var roles = await _roleService.GetAllRole();
+            IEnumerable<string> resultQuery = roles.Where(x => x.Agent_Id == user.Id).Select(x => x.RoleName);// ajout Martial
 
+            if (user == null) return BadRequest(new { message = "Email or password is incorrect" });
             var tokenHandler = new JwtSecurityTokenHandler();
+            
             var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("AppSettings:Secret"));
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                  {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, role.RoleName.ToString()),
+                    new Claim(ClaimTypes.Role, role.RoleName.ToString())
+                    //new Claim(ClaimTypes.Role, String.Join(", ", resultQuery)),
+
                  }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

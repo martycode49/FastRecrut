@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FastRecrut.Entities.Concrete;
 
 namespace FastRecrut.Business.Services.Abstract
@@ -9,5 +10,6 @@ namespace FastRecrut.Business.Services.Abstract
         void Create(Role role);
         void Update(Role role);
         void Delete(int id);
+        Task<List<Role>> GetAllRole();
     }
 }
