@@ -42,5 +42,10 @@ namespace FastRecrut.Business.Services.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Role>> GetAllRole(int id)
+        {
+            return await _unitOfWork.RoleDal.GetAllRoleAsync();
+        }
     }
 }

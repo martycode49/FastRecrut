@@ -9,6 +9,7 @@ using AutoMapper;
 using FastRecrut.Api.Resources;
 using FastRecrut.Business.Services.Abstract;
 using FastRecrut.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -37,7 +38,7 @@ namespace FastRecrut.Api.Controllers
         public async Task<IActionResult> Authenticate(AgentResource userResource)
         {
             var user = await _agentService.Authenticate(userResource.Email, userResource.Password);
-            //var role = await _roleService.GetRoleByIdUser(user.Id); // ajout Martial
+            var role = await _roleService.GetRoleByIdUser(user.Id); // ajout Martial
             if (user == null) return BadRequest(new { message = "Username or password is incorrect" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -47,9 +48,8 @@ namespace FastRecrut.Api.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                  {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    //new Claim(ClaimTypes.Role, role.RoleName.ToString()),
+                    new Claim(ClaimTypes.Role, role.RoleName.ToString()),
                  }),
-                 // Ajout Martial
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -99,6 +99,7 @@ namespace FastRecrut.Api.Controllers
             });
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<AgentResource>>> GetAllAgent()
         {

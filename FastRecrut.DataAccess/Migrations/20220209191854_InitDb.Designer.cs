@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FastRecrut.DataAccess.Migrations
 {
     [DbContext(typeof(FastRecrutDbContext))]
-    [Migration("20220209110139_upgradeRole")]
-    partial class upgradeRole
+    [Migration("20220209191854_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,12 +85,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 1,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 9, 12, 1, 38, 640, DateTimeKind.Local).AddTicks(1909),
+                            CreatedAt = new DateTime(2022, 2, 9, 20, 18, 53, 303, DateTimeKind.Local).AddTicks(5407),
                             Email = "m.leblanc@exemple.com",
                             Firstname = "Matt",
                             IsActive = true,
                             IsAdmin = true,
-                            LastLogin = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(7961),
+                            LastLogin = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(5053),
                             Lastname = "LeBlanc",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -99,12 +99,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 2,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9479),
+                            CreatedAt = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7029),
                             Email = "m.perry@exemple.com",
                             Firstname = "Matthew",
                             IsActive = true,
                             IsAdmin = true,
-                            LastLogin = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9504),
+                            LastLogin = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7061),
                             Lastname = "Perry",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -113,12 +113,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 3,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9512),
+                            CreatedAt = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7074),
                             Email = "c.cox@exemple.com",
                             Firstname = "Courteney",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9516),
+                            LastLogin = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7080),
                             Lastname = "Cox",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -127,12 +127,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 4,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9521),
+                            CreatedAt = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7092),
                             Email = "np.harris@exemple.com",
                             Firstname = "Neil Patrick",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9524),
+                            LastLogin = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7098),
                             Lastname = "Harris",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -141,12 +141,12 @@ namespace FastRecrut.DataAccess.Migrations
                         {
                             Id = 5,
                             Civility = "M.",
-                            CreatedAt = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9529),
+                            CreatedAt = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7107),
                             Email = "w.miller@exemple.com",
                             Firstname = "Wentworth",
                             IsActive = true,
                             IsAdmin = false,
-                            LastLogin = new DateTime(2022, 2, 9, 12, 1, 38, 644, DateTimeKind.Local).AddTicks(9533),
+                            LastLogin = new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7113),
                             Lastname = "Miller",
                             Phone = "0102030405",
                             Status = "Agent"
@@ -293,6 +293,9 @@ namespace FastRecrut.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Agent_Id")
+                        .HasColumnType("int");
+
                     b.Property<int?>("AgentsId")
                         .HasColumnType("int");
 
@@ -300,9 +303,6 @@ namespace FastRecrut.DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -314,8 +314,20 @@ namespace FastRecrut.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            RoleName = "Admin",
-                            UserId = 1
+                            Agent_Id = 1,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Agent_Id = 11,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Agent_Id = 11,
+                            RoleName = "Agent"
                         });
                 });
 

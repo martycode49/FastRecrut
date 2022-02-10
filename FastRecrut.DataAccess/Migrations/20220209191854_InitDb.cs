@@ -78,6 +78,27 @@ namespace FastRecrut.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Agent_Id = table.Column<int>(type: "int", nullable: false),
+                    RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AgentsId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Roles_Agents_AgentsId",
+                        column: x => x.AgentsId,
+                        principalTable: "Agents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ParticipantDatas",
                 columns: table => new
                 {
@@ -123,11 +144,21 @@ namespace FastRecrut.DataAccess.Migrations
                 columns: new[] { "Id", "Civility", "CreatedAt", "Email", "Firstname", "IsActive", "IsAdmin", "LastLogin", "Lastname", "PasswordHash", "PasswordSalt", "Phone", "Status" },
                 values: new object[,]
                 {
-                    { 1, "M.", new DateTime(2022, 2, 6, 13, 11, 48, 162, DateTimeKind.Local).AddTicks(249), "m.leblanc@exemple.com", "Matt", true, true, new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(1080), "LeBlanc", null, null, "0102030405", "Agent" },
-                    { 2, "M.", new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2399), "m.perry@exemple.com", "Matthew", true, true, new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2421), "Perry", null, null, "0102030405", "Agent" },
-                    { 3, "M.", new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2429), "c.cox@exemple.com", "Courteney", true, false, new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2433), "Cox", null, null, "0102030405", "Agent" },
-                    { 4, "M.", new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2439), "np.harris@exemple.com", "Neil Patrick", true, false, new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2443), "Harris", null, null, "0102030405", "Agent" },
-                    { 5, "M.", new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2449), "w.miller@exemple.com", "Wentworth", true, false, new DateTime(2022, 2, 6, 13, 11, 48, 180, DateTimeKind.Local).AddTicks(2452), "Miller", null, null, "0102030405", "Agent" }
+                    { 1, "M.", new DateTime(2022, 2, 9, 20, 18, 53, 303, DateTimeKind.Local).AddTicks(5407), "m.leblanc@exemple.com", "Matt", true, true, new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(5053), "LeBlanc", null, null, "0102030405", "Agent" },
+                    { 2, "M.", new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7029), "m.perry@exemple.com", "Matthew", true, true, new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7061), "Perry", null, null, "0102030405", "Agent" },
+                    { 3, "M.", new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7074), "c.cox@exemple.com", "Courteney", true, false, new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7080), "Cox", null, null, "0102030405", "Agent" },
+                    { 4, "M.", new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7092), "np.harris@exemple.com", "Neil Patrick", true, false, new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7098), "Harris", null, null, "0102030405", "Agent" },
+                    { 5, "M.", new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7107), "w.miller@exemple.com", "Wentworth", true, false, new DateTime(2022, 2, 9, 20, 18, 53, 310, DateTimeKind.Local).AddTicks(7113), "Miller", null, null, "0102030405", "Agent" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Agent_Id", "AgentsId", "RoleName" },
+                values: new object[,]
+                {
+                    { 1, 1, null, "Admin" },
+                    { 2, 11, null, "Admin" },
+                    { 3, 11, null, "Agent" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -149,12 +180,20 @@ namespace FastRecrut.DataAccess.Migrations
                 name: "IX_ParticipantDatas_QuizId",
                 table: "ParticipantDatas",
                 column: "QuizId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roles_AgentsId",
+                table: "Roles",
+                column: "AgentsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "ParticipantDatas");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "AgentParticipants");

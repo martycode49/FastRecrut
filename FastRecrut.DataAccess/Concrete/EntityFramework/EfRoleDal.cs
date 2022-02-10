@@ -37,7 +37,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         public async Task<Role> GetRoleByIdAsync(int id)
         {
             return await _FastRecrutDbContext.Roles
-                    .Where(role => role.UserId == id)
+                    .Where(role => role.Agent_Id == id)
                     .FirstOrDefaultAsync();
         }
 
@@ -49,5 +49,12 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
                 _FastRecrutDbContext.Roles.Remove(role);
             }
         }
+
+        public async Task<List<Role>> GetAllRoleAsync()
+        {
+            return await _FastRecrutDbContext.Roles
+             .ToListAsync();
+        }
+
     }
 }
