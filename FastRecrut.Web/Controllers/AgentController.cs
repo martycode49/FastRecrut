@@ -29,31 +29,43 @@ namespace FastRecrut.Web.Controllers
             _Config = Config;
         }
 
-        public IActionResult Index()
+        //Get: /api/Agent
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public async Task<IActionResult> AddMusic()
-        {
-            var agentViewModel = new AgentViewModel();
-            List<User> agentList = new List<User>();
-
+            IEnumerable<AgentViewModel> agentList;
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(URLBase + "Agent"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
 
+                    agentList = JsonConvert.DeserializeObject<List<AgentViewModel>>(apiResponse);
+                }
+            }
+            return View();
+        }
+
+
+        // Post : api/Agent/Edit/5
+        public async Task<IActionResult> EditAgent(int id)
+        {
+            var agentViewModel = new AgentViewModel();
+            List<User> agentList = new List<User>();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(URLBase + "Agent" + id.ToString()))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
                     agentList = JsonConvert.DeserializeObject<List<User>>(apiResponse);
                 }
             }
-            agentViewModel.AgentList = new SelectList(agentList, "Id", "Email");
             return View(agentViewModel);
 
         }
         [HttpPost]
-        public async Task<IActionResult> AddMusic(AgentViewModel agentModelView)
+        public async Task<IActionResult> EditAgent(AgentViewModel agentModelView)
         {
             if (ModelState.IsValid)
             {
