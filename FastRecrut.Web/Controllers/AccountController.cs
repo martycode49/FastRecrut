@@ -59,7 +59,7 @@ namespace FastRecrut.Web.Controllers
 
                         HttpContext.Session.SetString("email", jwt["email"].ToString());
 
-                        ViewBag.Message = "User logged in successfully!" + jwt["email"].ToString();
+                        ViewBag.Message = jwt["email"].ToString() + " logged in successfully!";
                     }
 
                 }
