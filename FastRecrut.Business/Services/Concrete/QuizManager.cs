@@ -17,13 +17,17 @@ namespace FastRecrut.Business.Services.Concrete
 
         public async void Create(Quiz quiz)
         {
-            await _UnitOfWork.QuizDal.(quiz);
+            //await _UnitOfWork.QuizDal.
             await _UnitOfWork.CommitAsync();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            //var quiz = _UnitOfWork.QuizDal.Find(id);
+            //if (quiz != null)
+            //{
+            //    _UnitOfWork.QuizDal.Remove(quiz);
+            //}
         }
 
         public Task<List<Quiz>> GetAllQuiz()
@@ -41,7 +45,7 @@ namespace FastRecrut.Business.Services.Concrete
             throw new NotImplementedException();
         }
 
-        void IQuizService.Update(Quiz quiz)
+        public void Update(Quiz quiz)
         {
             throw new NotImplementedException();
         }

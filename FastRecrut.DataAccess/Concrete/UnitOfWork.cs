@@ -16,7 +16,7 @@ namespace FastRecrut.DataAccess.Concrete
         private IRoleDal _roleDal;
         //private IAgentParticipantDal _AgentParticipantDal;
         //private IParticipantDataDal _ParticipantDataDal;
-        //private IQuizDal _QuizDal;
+        private IQuizDal _quizDal;
 
         public UnitOfWork(FastRecrutDbContext context)
         {
@@ -31,7 +31,7 @@ namespace FastRecrut.DataAccess.Concrete
 
         //public IParticipantDataDal ParticipantDataDal => throw new NotImplementedException();
 
-        //public IQuizDal QuizDal => throw new NotImplementedException();
+        public IQuizDal QuizDal => _quizDal = _quizDal ?? new EfQuizDal(_context);
 
 
         public async Task<int> CommitAsync()

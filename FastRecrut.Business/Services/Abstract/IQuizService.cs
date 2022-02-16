@@ -7,7 +7,7 @@ using FastRecrut.Entities.Concrete;
 
 namespace FastRecrut.Business.Services.Abstract
 {
-    interface IQuizService
+    public interface IQuizService
     {
         Task<Quiz> GetQuizById(int id);
         void Create(Quiz quiz);

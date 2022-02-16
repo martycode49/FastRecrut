@@ -46,8 +46,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         public async Task<List<Quiz>> GetAllQuizWithFilters(string subject, int level)
         {
             return await _FastRecrutDbContext.Quizzes
-                   .Where(q => q.Level == level)
-                   .Where(q=> q.SubSubject == subject).ToListAsync();
+                   .Where(q => q.Level == level && q.SubSubject == subject).ToListAsync();
         }
 
         public async Task<Quiz> GetQuizById(int id)
@@ -57,10 +56,9 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
                     .FirstOrDefaultAsync();
         }
 
-        void Update(Quiz quiz)
+        public void Update(Quiz quiz)
         {
-            _FastRecrutDbContext.Quizzes.Entry(Quiz).State = EntityState.Modified;
-            return entity;
+            _FastRecrutDbContext.Quizzes.Update(quiz).State = EntityState.Modified;
         }
     }
 }

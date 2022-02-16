@@ -38,7 +38,7 @@ Projet en cours de développement
 
 ## Auteurs
 
-* **Martial** _alias_ [@outout14](https://github.com/outout14)
+* **Martial** _alias_ [@Martycode49](https://github.com/Martycode49)
 
 ## License
 

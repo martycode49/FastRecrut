@@ -64,6 +64,7 @@ namespace FastRecrut
             // ceci evite de redéfinir toutes les contrats d'interface (les méthodes sont définies dans EfEntityRepository<RepoName>)
             services.AddScoped(typeof(IEntityRepository<Agent>), typeof(EfEntityRepositoryBase<Agent, FastRecrutDbContext>));
             services.AddScoped(typeof(IEntityRepository<Role>), typeof(EfEntityRepositoryBase<Role, FastRecrutDbContext>));
+            services.AddScoped(typeof(IEntityRepository<Quiz>), typeof(EfEntityRepositoryBase<Quiz, FastRecrutDbContext>));
             services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
@@ -71,6 +72,8 @@ namespace FastRecrut
             services.AddTransient<IAgentDal, EfAgentDal>();
             services.AddTransient<IRoleService, RoleManager>();
             services.AddTransient<IRoleDal, EfRoleDal>();
+            services.AddTransient<IQuizService, QuizManager>();
+            services.AddTransient<IQuizDal, EfQuizDal>();
 
             //Jwt
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));
