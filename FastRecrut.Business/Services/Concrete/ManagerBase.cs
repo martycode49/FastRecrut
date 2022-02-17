@@ -10,7 +10,7 @@ using FastRecrut.DataAccess.Abstract;
 
 namespace FastRecrut.Business.Services.Concrete
 {
-    public   class ManagerBase<TEntity> : IService<TEntity> where TEntity: class
+    public class ManagerBase<TEntity> : IService<TEntity> where TEntity: class
     {
         public readonly IUnitOfWork _UnitOfWork;
         private readonly IEntityRepository<TEntity> _repository;

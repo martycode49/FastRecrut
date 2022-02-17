@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FastRecrut.Core.Services.Abstract;
 using FastRecrut.Entities.Concrete;
 
 namespace FastRecrut.Business.Services.Abstract
 {
-    public interface IQuizService
-    {
-        Task<Quiz> GetQuizById(int id);
-        void Create(Quiz quiz);
-        void Update(Quiz quiz);
-        void Delete(int id);
-        Task<List<Quiz>> GetAllQuiz();
+    public interface IQuizService : IService<Quiz>
+    {   
+        // Specific contract for this entity 
         Task<List<Quiz>> GetAllQuizWithFilters(string subject, int level);
     }
 }

@@ -22,6 +22,8 @@ Ce qu'il est requis pour commencer avec votre projet :
 - Intégration d'une API suivant les recommandations ApiRest
 - Principes de la Dependency Injection, IoC
 
+![Architecture](/docs/NTiersArchi.png)
+
 ### Installation
 
 ## Démarrage

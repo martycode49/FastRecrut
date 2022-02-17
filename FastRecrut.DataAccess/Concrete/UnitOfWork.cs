@@ -12,26 +12,26 @@ namespace FastRecrut.DataAccess.Concrete
     public class UnitOfWork : IUnitOfWork
     {
         private readonly FastRecrutDbContext _context;
-        private IAgentDal _agentDal;
-        private IRoleDal _roleDal;
+        private EfAgentDal _efAgentDal;
+        private EfRoleDal _efRoleDal;
         //private IAgentParticipantDal _AgentParticipantDal;
         //private IParticipantDataDal _ParticipantDataDal;
-        private IQuizDal _quizDal;
+        private EfQuizDal _efQuizDal;
 
         public UnitOfWork(FastRecrutDbContext context)
         {
             this._context = context;
         }
 
-        public IAgentDal AgentDal =>  _agentDal = _agentDal ?? new EfAgentDal(_context);
+        public IAgentDal AgentDal =>  _efAgentDal = _efAgentDal ?? new EfAgentDal(_context);
 
-        public IRoleDal RoleDal => _roleDal = _roleDal ?? new EfRoleDal(_context);
+        public IRoleDal RoleDal => _efRoleDal = _efRoleDal ?? new EfRoleDal(_context);
 
         //public IAgentParticipantDal AgentParticipantDal => _AgentParticipantDal = _AgentParticipantDal ?? new EfAgentParticipantDal(_context);
 
         //public IParticipantDataDal ParticipantDataDal => throw new NotImplementedException();
 
-        public IQuizDal QuizDal => _quizDal = _quizDal ?? new EfQuizDal(_context);
+        public IQuizDal QuizDal => _efQuizDal = _efQuizDal ?? new EfQuizDal(_context);
 
 
         public async Task<int> CommitAsync()

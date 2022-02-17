@@ -35,21 +35,6 @@ namespace FastRecrut
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json
-                .ReferenceLoopHandling.Ignore
-               );
-
-            // Configuration pour SQL Server
-            services.AddDbContext<FastRecrutDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"].ToString(), o =>
-                {
-                    o.MigrationsAssembly("FastRecrut.DataAccess");
-                });
-            });
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -68,12 +53,27 @@ namespace FastRecrut
             services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
-            services.AddTransient<IAgentService, AgentManager>();
-            services.AddTransient<IAgentDal, EfAgentDal>();
-            services.AddTransient<IRoleService, RoleManager>();
-            services.AddTransient<IRoleDal, EfRoleDal>();
-            services.AddTransient<IQuizService, QuizManager>();
-            services.AddTransient<IQuizDal, EfQuizDal>();
+            services.AddScoped<IAgentService, AgentManager>();
+            services.AddScoped<IAgentDal, EfAgentDal>();
+            services.AddScoped<IRoleService, RoleManager>();
+            services.AddScoped<IRoleDal, EfRoleDal>();
+            services.AddScoped<IQuizService, QuizManager>();
+            services.AddScoped<IQuizDal, EfQuizDal>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Configuration pour SQL Server
+            services.AddDbContext<FastRecrutDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("FastRecrut.DataAccess");
+                });
+            });
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json
+                .ReferenceLoopHandling.Ignore
+               );
 
             //Jwt
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));
@@ -108,12 +108,13 @@ namespace FastRecrut
                     ValidateAudience = false
                 };
             });
-            
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

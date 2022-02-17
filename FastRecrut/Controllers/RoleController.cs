@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FastRecrut.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
