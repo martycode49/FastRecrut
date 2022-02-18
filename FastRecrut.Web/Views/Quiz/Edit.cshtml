@@ -1,0 +1,88 @@
+﻿@model FastRecrut.Web.ViewModels.QuizViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>QuizViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubSubject" class="control-label"></label>
+                <input asp-for="SubSubject" class="form-control" />
+                <span asp-validation-for="SubSubject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionType" class="control-label"></label>
+                <input asp-for="QuestionType" class="form-control" />
+                <span asp-validation-for="QuestionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question" class="control-label"></label>
+                <input asp-for="Question" class="form-control" />
+                <span asp-validation-for="Question" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rep1" class="control-label"></label>
+                <input asp-for="Rep1" class="form-control" />
+                <span asp-validation-for="Rep1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rep2" class="control-label"></label>
+                <input asp-for="Rep2" class="form-control" />
+                <span asp-validation-for="Rep2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rep3" class="control-label"></label>
+                <input asp-for="Rep3" class="form-control" />
+                <span asp-validation-for="Rep3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rep4" class="control-label"></label>
+                <input asp-for="Rep4" class="form-control" />
+                <span asp-validation-for="Rep4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidQuestion" class="control-label"></label>
+                <input asp-for="ValidQuestion" class="form-control" />
+                <span asp-validation-for="ValidQuestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommentFalse" class="control-label"></label>
+                <input asp-for="CommentFalse" class="form-control" />
+                <span asp-validation-for="CommentFalse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

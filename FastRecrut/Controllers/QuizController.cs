@@ -19,7 +19,7 @@ namespace FastRecrut.Api.Controllers
             _quizService = quizService;
         }
 
-        // GET: Quiz
+        // GET: api/Quiz
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -27,22 +27,30 @@ namespace FastRecrut.Api.Controllers
             return Ok(quizzes);
         }
 
-        // GET: Quiz with filters => Subject(string) , Level(int)
+        // GET: api/Quiz/filter with filters => Subject(string) , Level(int)
         [HttpGet("filter/{level}/{subject}")]
-        public async Task<IActionResult> GetByIdSubject(int level, string subject)
+        public async Task<IActionResult> GetBySubjectLevel(int level, string subject)
         {
-            var quizzes = await _quizService.GetAllAsync();
-            return Ok(quizzes.Where(q=>q.Level == level && q.Subject == subject));
+            var quizzes = await _quizService.GetAllQuizWithFilters(subject,level);
+            return Ok(quizzes);
         }
 
-        // GET: QuizController/5
+        // GET: api/Quiz/filter with filters => Subject(string)
+        [HttpGet("filter/{subject}")]
+        public async Task<IActionResult> GetBySubject(int level, string subject)
+        {
+            var quizzes = await _quizService.GetAllQuizWithSubject(subject);
+            return Ok(quizzes);
+        }
+
+        // GET: api/Quiz/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             try
             {
                 var quiz = await _quizService.GetByIdAsync(id);
-                if (quiz == null) return BadRequest("Data not available !");
+                if (quiz == null) return NotFound("Data not available !");
                 return Ok(quiz);
             }
             catch (Exception ex)
@@ -51,7 +59,7 @@ namespace FastRecrut.Api.Controllers
             }
         }
 
-        // GET: Quiz/Create
+        // GET: api/Quiz/Create
         [HttpPost]
         public async Task<IActionResult> Create(Quiz quiz)
         {
@@ -59,7 +67,7 @@ namespace FastRecrut.Api.Controllers
             return Ok(quiz);
         }
 
-        // POST: Quiz/Edit/5
+        // POST: api/Quiz/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, Quiz quiz)
         {

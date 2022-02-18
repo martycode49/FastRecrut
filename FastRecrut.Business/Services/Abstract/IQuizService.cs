@@ -9,5 +9,6 @@ namespace FastRecrut.Business.Services.Abstract
     {   
         // Specific contract for this entity 
         Task<List<Quiz>> GetAllQuizWithFilters(string subject, int level);
+        Task<List<Quiz>> GetAllQuizWithSubject(string subject);
     }
 }

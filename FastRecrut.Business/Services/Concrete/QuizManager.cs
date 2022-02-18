@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FastRecrut.Business.Services.Abstract;
 using FastRecrut.Core.DataAccess.Abstract;
@@ -14,9 +15,16 @@ namespace FastRecrut.Business.Services.Concrete
         { }
 
 
-        public Task<List<Quiz>> GetAllQuizWithFilters(string subject, int level)
+        public async Task<List<Quiz>> GetAllQuizWithFilters(string subject, int level)
         {
-            throw new NotImplementedException();
+            var quizzes = await GetAllAsync();
+            return quizzes.Where(q => q.Level == level && q.Subject == subject).ToList();
+        }
+
+        public async Task<List<Quiz>> GetAllQuizWithSubject(string subject)
+        {
+            var quizzes = await GetAllAsync();
+            return quizzes.Where(q => q.Subject == subject).ToList();
         }
     }
 }

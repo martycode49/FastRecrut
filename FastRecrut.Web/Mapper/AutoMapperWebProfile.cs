@@ -12,10 +12,10 @@ namespace FastRecrut.Web.Mapper
         public AutoMapperWebProfile()
         {
             CreateMap<User, AgentViewModel>();
+            CreateMap<AgentViewModel, User>();//Reverse mapping
 
-            //Reverse mapping
-
-            CreateMap<AgentViewModel, User>();
+            CreateMap<Quiz, QuizViewModel>();
+            CreateMap<QuizViewModel, Quiz>();
         }
     }
 }
