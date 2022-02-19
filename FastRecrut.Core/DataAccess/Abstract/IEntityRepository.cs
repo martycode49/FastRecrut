@@ -15,13 +15,14 @@ namespace FastRecrut.Core.DataAccess.Abstract
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        TEntity Update(TEntity entity);
+        void Update(TEntity entity);
+        
 
 
         // Eliminer en dessous
-        TEntity Get(Expression<Func<TEntity, bool>> filter);
-        List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
-        void Add(TEntity entity);
-        void Delete(TEntity entity);
+        //TEntity Get(Expression<Func<TEntity, bool>> filter);
+        //List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
+        //void Add(TEntity entity);
+        //void Delete(TEntity entity);
     }
 }

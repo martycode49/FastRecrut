@@ -67,11 +67,11 @@ namespace FastRecrut.Business.Services.Concrete
             _UnitOfWork.Commit();
         }
 
-        public TEntity Update(TEntity entity)
+        public void Update(TEntity entity)
         {
-            TEntity updateEntity = _repository.Update(entity);
+            _repository.Update(entity);
             _UnitOfWork.Commit();
-            return updateEntity;
         }
+
     }
 }

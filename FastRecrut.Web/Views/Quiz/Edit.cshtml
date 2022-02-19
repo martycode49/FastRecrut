@@ -59,7 +59,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Level" class="control-label"></label>
-                <input asp-for="Level" class="form-control" />
+                @*<input asp-for="Level" class="form-control" />*@
+                <select asp-for="Level" class="form-control" asp-items="@Html.GetEnumSelectList<LevelList>()"></select>
                 <span asp-validation-for="Level" class="text-danger"></span>
             </div>
             <div class="form-group">

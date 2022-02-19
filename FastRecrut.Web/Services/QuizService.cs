@@ -71,7 +71,7 @@ namespace FastRecrut.Web.Services
             var response = await this.httpClient.PostAsync($"Quiz", content);
 
             if (response.IsSuccessStatusCode)
-            {
+            {   
                 return true;
             }
 
@@ -80,7 +80,7 @@ namespace FastRecrut.Web.Services
 
         public async Task<bool> Update(int id, QuizViewModel quiz)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(quiz), Encoding.UTF8, "application/json");
+             var content = new StringContent(JsonConvert.SerializeObject(quiz), Encoding.UTF8, "application/json");
             var response = await this.httpClient.PutAsync($"Quiz/{id}", content);
 
             if (response.IsSuccessStatusCode)

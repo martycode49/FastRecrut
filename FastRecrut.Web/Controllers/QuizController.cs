@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FastRecrut.Web.Services;
 using FastRecrut.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FastRecrut.Web.Controllers
 {
@@ -51,17 +52,24 @@ namespace FastRecrut.Web.Controllers
             return View(quiz);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Edit(QuizViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                await quizService.Update(vm.Id, vm);
+                var result = await quizService.Update(vm.Id, vm);
                 return RedirectToAction("Index");
             }
             return View(vm);
         }
 
-
+        // GET: Pizzas/Delete/5
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+            var quiz = await quizService.Get((int)id);
+            if (quiz == null) return NotFound();
+            return View(quiz);
+        }
     }
 }
