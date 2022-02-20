@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FastRecrut.DataAccess.Abstract
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IAgentDal AgentDal { get; }
         IRoleDal RoleDal { get; }

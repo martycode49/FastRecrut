@@ -89,10 +89,11 @@ namespace FastRecrut.Core.DataAccess.Concrete.EntityFramework
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public void Update(TEntity entity)
+        public TEntity Update(TEntity entity)
         {
             //_dbSet.Update(entity);
             _context.Entry(entity).State = EntityState.Modified;
+            return entity;
         }
     }
 }

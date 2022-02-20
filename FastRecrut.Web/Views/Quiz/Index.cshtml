@@ -52,7 +52,8 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -95,6 +96,22 @@
                     @Html.ActionLink("", "Delete", new { id = item.Id }, new { @class = "btn btn-default fa fa-trash" })
                 </td>
             </tr>
-         }
+        }
     </tbody>
 </table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web Api CRUD Operations','Are You Sure to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("Delete","Employee")/'+id;
+            },null );
+        }
+    </script>
+}

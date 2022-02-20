@@ -81,7 +81,7 @@ namespace FastRecrut.Web.Services
         public async Task<bool> Update(int id, QuizViewModel quiz)
         {
              var content = new StringContent(JsonConvert.SerializeObject(quiz), Encoding.UTF8, "application/json");
-            var response = await this.httpClient.PutAsync($"Quiz/{id}", content);
+            var response = await this.httpClient.PutAsync($"Quiz", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -92,8 +92,8 @@ namespace FastRecrut.Web.Services
         }
 
         public async Task<bool> Delete(int id)
-        {
-            var response = await this.httpClient.DeleteAsync("Quiz/{id}");
+        {   
+            var response = await this.httpClient.DeleteAsync($"Quiz/{id}");
 
             if (response.IsSuccessStatusCode)
             {

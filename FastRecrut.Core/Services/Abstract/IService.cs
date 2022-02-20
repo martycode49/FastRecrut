@@ -17,6 +17,6 @@ namespace FastRecrut.Core.Services.Abstract
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        void Update(TEntity entity);
+        TEntity Update(TEntity entity);
     }
 }

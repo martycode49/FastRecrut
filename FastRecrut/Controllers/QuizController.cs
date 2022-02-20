@@ -67,16 +67,15 @@ namespace FastRecrut.Api.Controllers
             return Ok(quiz);
         }
 
-        // POST: api/Quiz/5
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Quiz quiz)
+        // Update: api/Quiz
+        [HttpPut()]
+        public IActionResult Update(Quiz quiz)
         {
-            var updateQuiz = _quizService.GetByIdAsync(id).Result;
-            _quizService.Update(quiz);
+            var updateQuiz = _quizService.Update(quiz);
             return NoContent();
         }
 
-        // POST: Quiz/Delete/5
+        // Delete: Quiz/Delete/5
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {

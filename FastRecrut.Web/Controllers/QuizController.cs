@@ -63,13 +63,14 @@ namespace FastRecrut.Web.Controllers
             return View(vm);
         }
 
-        // GET: Pizzas/Delete/5
+        // /Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();
-            var quiz = await quizService.Get((int)id);
-            if (quiz == null) return NotFound();
-            return View(quiz);
+            var quiz = await quizService.Delete((int)id);
+            if (quiz == false) return NotFound();
+            TempData["SuccessMessage"] = "Deleted Successfully";
+            return RedirectToAction("Index");
         }
     }
 }
