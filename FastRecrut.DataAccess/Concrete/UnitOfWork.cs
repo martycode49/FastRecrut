@@ -15,7 +15,7 @@ namespace FastRecrut.DataAccess.Concrete
         private EfAgentDal _efAgentDal;
         private EfRoleDal _efRoleDal;
         //private IAgentParticipantDal _AgentParticipantDal;
-        //private IParticipantDataDal _ParticipantDataDal;
+        private EfParticipantDataDal _ParticipantDataDal;
         private EfQuizDal _efQuizDal;
 
         public UnitOfWork(FastRecrutDbContext context)
@@ -29,7 +29,7 @@ namespace FastRecrut.DataAccess.Concrete
 
         //public IAgentParticipantDal AgentParticipantDal => _AgentParticipantDal = _AgentParticipantDal ?? new EfAgentParticipantDal(_context);
 
-        //public IParticipantDataDal ParticipantDataDal => throw new NotImplementedException();
+        public IParticipantDataDal ParticipantDataDal => _ParticipantDataDal = _ParticipantDataDal ?? new EfParticipantDataDal(_context);
 
         public IQuizDal QuizDal => _efQuizDal = _efQuizDal ?? new EfQuizDal(_context);
 

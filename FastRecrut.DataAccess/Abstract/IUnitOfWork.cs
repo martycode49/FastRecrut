@@ -13,7 +13,7 @@ namespace FastRecrut.DataAccess.Abstract
 
         //IAgentParticipantDal AgentParticipantDal { get; }
         
-        //IParticipantDataDal ParticipantDataDal { get; }
+        IParticipantDataDal ParticipantDataDal { get; }
 
         IQuizDal QuizDal { get; }
         Task<int> CommitAsync();

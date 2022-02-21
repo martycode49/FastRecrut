@@ -1,0 +1,89 @@
+﻿@model IEnumerable<FastRecrut.Web.Models.ParticipantData>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizQuestionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizParticipId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizValidAnswer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizQstart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizQend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizCommentPart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizFreeAnswer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuizValidFreeAnswer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizQuestionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizParticipId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizValidAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizQstart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizQend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizCommentPart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizFreeAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizValidFreeAnswer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
