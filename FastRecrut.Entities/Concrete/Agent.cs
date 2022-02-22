@@ -13,6 +13,7 @@ namespace FastRecrut.Entities.Concrete
         {
             this.AgentParticipants = new HashSet<AgentParticipant>();
             this.Roles = new HashSet<Role>();
+            this.ParticipantDatas = new HashSet<ParticipantData>();
         }
 
         public int Id { get; set; }
@@ -31,7 +32,7 @@ namespace FastRecrut.Entities.Concrete
 
 
         public virtual ICollection<AgentParticipant> AgentParticipants { get; set; }
-
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<ParticipantData> ParticipantDatas { get; set; }
     }
 }

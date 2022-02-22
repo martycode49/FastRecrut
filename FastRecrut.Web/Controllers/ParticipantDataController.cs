@@ -53,7 +53,7 @@ namespace FastRecrut.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await pdataService.Update(vm.participantData.Id, vm);
+                var result = await pdataService.Update(vm.Id, vm);
                 return RedirectToAction("Index");
             }
             return View(vm);
