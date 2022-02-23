@@ -14,8 +14,8 @@ namespace FastRecrut.DataAccess.Concrete
         private readonly FastRecrutDbContext _context;
         private EfAgentDal _efAgentDal;
         private EfRoleDal _efRoleDal;
-        //private IAgentParticipantDal _AgentParticipantDal;
-        private EfParticipantDataDal _ParticipantDataDal;
+        private EfAgentParticipantDal _efAgentParticipantDal;
+        private EfParticipantDataDal _efParticipantDataDal;
         private EfQuizDal _efQuizDal;
 
         public UnitOfWork(FastRecrutDbContext context)
@@ -27,11 +27,11 @@ namespace FastRecrut.DataAccess.Concrete
 
         public IRoleDal RoleDal => _efRoleDal = _efRoleDal ?? new EfRoleDal(_context);
 
-        //public IAgentParticipantDal AgentParticipantDal => _AgentParticipantDal = _AgentParticipantDal ?? new EfAgentParticipantDal(_context);
-
-        public IParticipantDataDal ParticipantDataDal => _ParticipantDataDal = _ParticipantDataDal ?? new EfParticipantDataDal(_context);
+        public IParticipantDataDal ParticipantDataDal => _efParticipantDataDal = _efParticipantDataDal ?? new EfParticipantDataDal(_context);
 
         public IQuizDal QuizDal => _efQuizDal = _efQuizDal ?? new EfQuizDal(_context);
+
+        public IAgentParticipantDal AgentParticipantDal => _efAgentParticipantDal = _efAgentParticipantDal ?? new EfAgentParticipantDal(_context);
 
 
         public async Task<int> CommitAsync()

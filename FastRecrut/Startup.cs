@@ -51,6 +51,7 @@ namespace FastRecrut
             services.AddScoped(typeof(IEntityRepository<Role>), typeof(EfEntityRepositoryBase<Role, FastRecrutDbContext>));
             services.AddScoped(typeof(IEntityRepository<Quiz>), typeof(EfEntityRepositoryBase<Quiz, FastRecrutDbContext>));
             services.AddScoped(typeof(IEntityRepository<ParticipantData>), typeof(EfEntityRepositoryBase<ParticipantData, FastRecrutDbContext>));
+            services.AddScoped(typeof(IEntityRepository<AgentParticipant>), typeof(EfEntityRepositoryBase<AgentParticipant, FastRecrutDbContext>));
             services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
@@ -62,6 +63,8 @@ namespace FastRecrut
             services.AddScoped<IQuizDal, EfQuizDal>();
             services.AddScoped<IParticipantDataService, ParticipantDataManager>();
             services.AddScoped<IParticipantDataDal, EfParticipantDataDal>();
+            //services.AddScoped<IAgentParticipantService, AgentParticipantManager>();
+            services.AddScoped<IAgentParticipantDal, EfAgentParticipantDal>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Configuration pour SQL Server

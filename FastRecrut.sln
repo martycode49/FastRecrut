@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.DataAccess", "Fa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Business", "FastRecrut.Business\FastRecrut.Business.csproj", "{FAD5A4B5-4334-4F2F-9F60-5E20F3A436D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastRecrut.Web", "FastRecrut.Web\FastRecrut.Web.csproj", "{C2B5F010-4F9D-4912-9838-9C9B39466283}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastRecrut.Web", "FastRecrut.Web\FastRecrut.Web.csproj", "{C2B5F010-4F9D-4912-9838-9C9B39466283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
