@@ -76,7 +76,7 @@ namespace FastRecrut.Web.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    var agent = new AgentViewModel() { Id = agentModelView.Id, Email = agentModelView.Email };
+                    var agent = new AgentViewModel() { AgentId = agentModelView.AgentId, Email = agentModelView.Email };
                     var JWToken = HttpContext.Session.GetString("token");
                     if (string.IsNullOrEmpty(JWToken))
                     {

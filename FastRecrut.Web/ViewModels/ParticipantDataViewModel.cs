@@ -11,11 +11,11 @@ namespace FastRecrut.Web.ViewModels
     {
         public int Id { get; set; }
         [DisplayName("Id du agent/part")]
-        public int QuizId { get; set; }
+        public int AgtPartId { get; set; }
         [DisplayName("Id du Quiz")]
-        public int QuizQuestionId { get; set; }
+        public int QuizId { get; set; }
         [DisplayName("Id du participant")]
-        public int QuizParticipId { get; set; }
+        public int AgentId { get; set; }
         public int QuizValidAnswer { get; set; }
         public Nullable<System.DateTime> QuizQstart { get; set; }
         public Nullable<System.DateTime> QuizQend { get; set; }

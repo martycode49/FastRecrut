@@ -18,13 +18,13 @@ namespace FastRecrut.Business.Services.Concrete
         public async Task<List<ParticipantData>> GetAllParticipantDataWithAgentIDParticipantID(int agentId, int participantId)
         {
             var pdatas = await GetAllAsync();
-            return pdatas.Where(q => q.Agents.Id == agentId && q.QuizParticipId == participantId).ToList();
+            return pdatas.Where(q => q.AgentId == agentId && q.AgtPartId == participantId).ToList();
         }
 
         public async Task<List<ParticipantData>> GetAllParticipantDataWithParticipantId(int participantId)
         {
             var pdatas = await GetAllAsync();
-            return pdatas.Where(q => q.QuizParticipId == participantId).ToList();
+            return pdatas.Where(q => q.AgtPartId == participantId).ToList();
         }
     }
 }

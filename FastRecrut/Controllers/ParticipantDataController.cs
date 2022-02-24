@@ -10,7 +10,7 @@ namespace FastRecrut.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantDataController : Controller
+    public class ParticipantDataController : ControllerBase
     {
         private readonly IParticipantDataService _pdataService;
         //private readonly IMapper _mapper; // for Dto using

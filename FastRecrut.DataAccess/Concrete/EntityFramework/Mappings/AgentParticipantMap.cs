@@ -15,8 +15,8 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
          */
         public void Configure(EntityTypeBuilder<AgentParticipant> builder)
         {
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id).UseIdentityColumn();
+            builder.HasKey(a => a.AgtPartId);
+            builder.Property(a => a.AgtPartId).UseIdentityColumn();
             builder.ToTable("AgentParticipants");
         }
     }

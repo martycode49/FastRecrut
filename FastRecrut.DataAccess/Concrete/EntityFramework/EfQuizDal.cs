@@ -50,7 +50,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         public async Task<Quiz> GetQuizById(int id)
         {
             return await _FastRecrutDbContext.Quizzes
-                    .Where(q => q.Id == id)
+                    .Where(q => q.QuizId == id)
                     .FirstOrDefaultAsync();
         }
 

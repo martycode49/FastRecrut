@@ -23,8 +23,8 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
 
         public void Configure(EntityTypeBuilder<Quiz> builder)
         {
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id).UseIdentityColumn();
+            builder.HasKey(a => a.QuizId);
+            builder.Property(a => a.QuizId).UseIdentityColumn();
             builder.ToTable("Quizzes");
         }
     }

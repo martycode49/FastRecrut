@@ -10,7 +10,7 @@ namespace FastRecrut.Web.ViewModels
     public enum LevelList { Junior=1,Confirmé=2,Expert=3}
     public class QuizViewModel
     {
-        public int Id { get; set; }
+        public int QuizId { get; set; }
         public string Subject { get; set; }
         public string SubSubject { get; set; }
         public string QuestionType { get; set; }

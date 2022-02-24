@@ -72,7 +72,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         public async Task<Agent> GetWithAgentsByIdAsync(int id) // origine
         {
             return await _FastRecrutDbContext.Agents
-                    .Where(user => user.Id == id)
+                    .Where(user => user.AgentId == id)
                     .FirstOrDefaultAsync();
         }
 
@@ -109,7 +109,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
 
         public void Update(Agent agentParam, string password = null) // origine
         {
-            var user = _FastRecrutDbContext.Agents.Find(agentParam.Id);
+            var user = _FastRecrutDbContext.Agents.Find(agentParam.AgentId);
 
             if (user == null)
                 throw new Exception("User not found");

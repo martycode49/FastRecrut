@@ -14,7 +14,7 @@ namespace FastRecrut.Entities.Concrete
             this.ParticipantDatas = new HashSet<ParticipantData>();
         }
 
-        public int Id { get; set; }
+        public int QuizId { get; set; }
         public string Subject { get; set; }
         public string SubSubject { get; set; }
         public string QuestionType { get; set; }

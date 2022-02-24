@@ -6,7 +6,7 @@ namespace FastRecrut.Entities.Concrete
     {
         public int Id { get; set; }
 
-        [ForeignKey("Agent")]
+        [ForeignKey("AgentId")]
         public int Agent_Id { get; set; }
         public string RoleName { get; set; }
 

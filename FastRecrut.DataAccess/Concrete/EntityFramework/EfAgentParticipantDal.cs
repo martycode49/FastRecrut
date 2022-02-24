@@ -47,7 +47,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         public async Task<AgentParticipant> GetAgentPartById(int id)
         {
             return await _FastRecrutDbContext.AgentParticipants
-                    .Where(q => q.Id == id)
+                    .Where(q => q.AgtPartId == id)
                     .FirstOrDefaultAsync();
         }
 

@@ -24,8 +24,8 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
          */
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id).UseIdentityColumn();
+            builder.HasKey(a => a.AgentId);
+            builder.Property(a => a.AgentId).UseIdentityColumn();
             builder.Property(a => a.Civility).IsRequired();
             builder.Property(a => a.Civility).HasMaxLength(5);
             builder.Property(a => a.Lastname).IsRequired();
@@ -40,7 +40,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
             builder.HasData(
                 new Agent
                 {
-                    Id = 1,
+                    AgentId = 1,
                     Civility = "M.",
                     Firstname = "Matt",
                     Lastname = "LeBlanc",
@@ -54,7 +54,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                 },
                 new Agent
                 {
-                    Id = 2,
+                    AgentId = 2,
                     Civility = "M.",
                     Firstname = "Matthew",
                     Lastname = "Perry",
@@ -68,7 +68,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                 },
                 new Agent
                 {
-                    Id = 3,
+                    AgentId = 3,
                     Civility = "M.",
                     Firstname = "Courteney",
                     Lastname = "Cox",
@@ -82,7 +82,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                 },
                 new Agent
                 {
-                    Id = 4,
+                    AgentId = 4,
                     Civility = "M.",
                     Firstname = "Neil Patrick",
                     Lastname = "Harris",
@@ -96,7 +96,7 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework.Mappings
                 },
                 new Agent
                 {
-                    Id = 5,
+                    AgentId = 5,
                     Civility = "M.",
                     Firstname = "Wentworth",
                     Lastname = "Miller",

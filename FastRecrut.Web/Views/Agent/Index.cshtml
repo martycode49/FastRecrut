@@ -53,8 +53,8 @@
         @Html.DisplayFor(modelItem => item.RoleList)
     </td>
     <td>
-        <a href="@Url.Action("Edit", "Agent", new { id = item.Id})" class="btn btn-default"><i class="fa fa-pencil"></i>  Edit</a>
-        <a onclick="Delete(@item.Id)" class="btn btn-default"><i class="fa fa-trash"></i>  Delete</a>
+        <a href="@Url.Action("Edit", "Agent", new { id = item.AgentId})" class="btn btn-default"><i class="fa fa-pencil"></i>  Edit</a>
+        <a onclick="Delete(@item.AgentId)" class="btn btn-default"><i class="fa fa-trash"></i>  Delete</a>
     </td>
 </tr>
     }

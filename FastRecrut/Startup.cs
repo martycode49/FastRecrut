@@ -42,6 +42,20 @@ namespace FastRecrut
                 { Title = "Fast Recruitment API", Description = "DotNet Core Api - with swagger" });
             });
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json
+                .ReferenceLoopHandling.Ignore
+               );
+
+            // Configuration pour SQL Server
+            services.AddDbContext<FastRecrutDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("FastRecrut.DataAccess");
+                });
+            });
+
             // Auto Mapper
             services.AddAutoMapper(typeof(Startup));
 
@@ -55,31 +69,17 @@ namespace FastRecrut
             services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
-            services.AddScoped<IAgentService, AgentManager>();
+            services.AddTransient<IAgentService, AgentManager>();
             services.AddScoped<IAgentDal, EfAgentDal>();
-            services.AddScoped<IRoleService, RoleManager>();
+            services.AddTransient<IRoleService, RoleManager>();
             services.AddScoped<IRoleDal, EfRoleDal>();
-            services.AddScoped<IQuizService, QuizManager>();
+            services.AddTransient<IQuizService, QuizManager>();
             services.AddScoped<IQuizDal, EfQuizDal>();
-            services.AddScoped<IParticipantDataService, ParticipantDataManager>();
+            services.AddTransient<IParticipantDataService, ParticipantDataManager>();
             services.AddScoped<IParticipantDataDal, EfParticipantDataDal>();
-            //services.AddScoped<IAgentParticipantService, AgentParticipantManager>();
+            //services.AddTransient<IAgentParticipantService, AgentParticipantManager>();
             services.AddScoped<IAgentParticipantDal, EfAgentParticipantDal>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            // Configuration pour SQL Server
-            services.AddDbContext<FastRecrutDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"].ToString(), o =>
-                {
-                    o.MigrationsAssembly("FastRecrut.DataAccess");
-                });
-            });
-
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json
-                .ReferenceLoopHandling.Ignore
-               );
 
             //Jwt
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));

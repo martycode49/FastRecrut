@@ -10,19 +10,20 @@ namespace FastRecrut.Entities.Concrete
 {
     public class AgentParticipant : IEntity
     {
+
         public AgentParticipant()
         {
             this.ParticipantDatas = new HashSet<ParticipantData>();
         }
-
-        public int Id { get; set; }
-        [ForeignKey("Agent")]
-        public int IdAgent { get; set; }
+        public int AgtPartId { get; set; }
+        [ForeignKey("AgentId")]
+        public int AgentId { get; set; }
         public Nullable<System.DateTime> datecreate { get; set; }
         public int QuestionQty { get; set; }
         public string Status { get; set; }
 
         public virtual Agent Agents { get; set; }
         public virtual ICollection<ParticipantData> ParticipantDatas { get; set; }
+        //public virtual ParticipantData ParticipantDatas { get; set; }
     }
 }

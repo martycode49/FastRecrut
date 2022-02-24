@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.QuizId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
@@ -56,7 +56,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => item.QuizId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Subject)
@@ -92,8 +92,8 @@
                     @Html.DisplayFor(modelItem => item.CommentFalse)
                 </td>
                 <td>
-                    @Html.ActionLink("", "Edit", new { id = item.Id }, new { @class = "btn btn-default fa fa-pencil" })
-                    @Html.ActionLink("", "Delete", new { id = item.Id }, new { @class = "btn btn-default fa fa-trash" })
+                    @Html.ActionLink("", "Edit", new { id = item.QuizId }, new { @class = "btn btn-default fa fa-pencil" })
+                    @Html.ActionLink("", "Delete", new { id = item.QuizId }, new { @class = "btn btn-default fa fa-trash" })
                 </td>
             </tr>
         }

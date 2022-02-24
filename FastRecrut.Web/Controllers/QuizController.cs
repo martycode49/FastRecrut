@@ -57,7 +57,7 @@ namespace FastRecrut.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await quizService.Update(vm.Id, vm);
+                var result = await quizService.Update(vm.QuizId, vm);
                 return RedirectToAction("Index");
             }
             return View(vm);
