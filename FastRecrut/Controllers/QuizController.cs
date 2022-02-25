@@ -72,7 +72,7 @@ namespace FastRecrut.Api.Controllers
         public IActionResult Update(Quiz quiz)
         {
             var updateQuiz = _quizService.Update(quiz);
-            return NoContent();
+            return Ok();
         }
 
         // Delete: Quiz/Delete/5
@@ -81,7 +81,7 @@ namespace FastRecrut.Api.Controllers
         {
             var deletedQuiz = _quizService.GetByIdAsync(id).Result;
             _quizService.Remove(deletedQuiz);
-            return NoContent();
+            return Ok();
         }
     }
 }

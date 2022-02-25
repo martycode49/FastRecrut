@@ -11,6 +11,7 @@ namespace FastRecrut.Web.Models
 
         public int Agent_Id { get; set; }
         public string RoleName { get; set; }
+        public int AgentsAgentId { get; set; }
 
     }
 }

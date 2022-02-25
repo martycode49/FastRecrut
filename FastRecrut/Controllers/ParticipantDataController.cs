@@ -73,7 +73,7 @@ namespace FastRecrut.Api.Controllers
         public IActionResult Update(ParticipantData pdata)
         {
             var updatePdata = _pdataService.Update(pdata);
-            return NoContent();
+            return Ok();
         }
 
         // Delete: ParticipantData/Delete/5
@@ -82,7 +82,7 @@ namespace FastRecrut.Api.Controllers
         {
             var deletedPdata = _pdataService.GetByIdAsync(id).Result;
             _pdataService.Remove(deletedPdata);
-            return NoContent();
+            return Ok();
         }
     }
 }

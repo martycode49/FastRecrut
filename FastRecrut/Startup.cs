@@ -69,15 +69,15 @@ namespace FastRecrut
             services.AddScoped(typeof(IService<>), typeof(ManagerBase<>));
 
             // Services 
-            services.AddTransient<IAgentService, AgentManager>();
+            services.AddScoped<IAgentService, AgentManager>();
             services.AddScoped<IAgentDal, EfAgentDal>();
-            services.AddTransient<IRoleService, RoleManager>();
+            services.AddScoped<IRoleService, RoleManager>();
             services.AddScoped<IRoleDal, EfRoleDal>();
             services.AddTransient<IQuizService, QuizManager>();
             services.AddScoped<IQuizDal, EfQuizDal>();
             services.AddTransient<IParticipantDataService, ParticipantDataManager>();
             services.AddScoped<IParticipantDataDal, EfParticipantDataDal>();
-            //services.AddTransient<IAgentParticipantService, AgentParticipantManager>();
+            services.AddTransient<IAgentParticipantService, AgentParticipantManager>();
             services.AddScoped<IAgentParticipantDal, EfAgentParticipantDal>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -24,9 +24,9 @@ namespace FastRecrut.Api.Controllers
         private readonly IAgentService _agentService;
         private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
-        private readonly Microsoft.Extensions.Configuration.IConfiguration _config;
+        private readonly IConfiguration _config;
 
-        public AgentController(IAgentService agentService, IRoleService roleService, IMapper mapper, Microsoft.Extensions.Configuration.IConfiguration config)
+        public AgentController(IAgentService agentService, IRoleService roleService, IMapper mapper, IConfiguration config)
         {
             _agentService = agentService;
             _roleService = roleService;
@@ -38,9 +38,9 @@ namespace FastRecrut.Api.Controllers
         public async Task<IActionResult> Authenticate(AgentResource userResource)
         {
             var user = await _agentService.Authenticate(userResource.Email, userResource.Password);
-            var role = await _roleService.GetRoleByIdUser(user.AgentId); // ajout Martial
+            //var role = await _roleService.GetRoleByIdUser(user.AgentId); // ajout Martial
             var roles = await _roleService.GetAllRole();
-            IEnumerable<string> resultQuery = roles.Where(x => x.Agent_Id == user.AgentId).Select(x => x.RoleName);// ajout Martial
+            IEnumerable<string> resultQuery = roles.Where(x => x.AgentsAgentId == user.AgentId).Select(x => x.RoleName);// ajout Martial
 
             if (user == null) return BadRequest(new { message = "Email or password is incorrect" });
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -51,9 +51,8 @@ namespace FastRecrut.Api.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                  {
                     new Claim(ClaimTypes.Name, user.AgentId.ToString()),
-                    new Claim(ClaimTypes.Role, role.RoleName.ToString())
-                    //new Claim(ClaimTypes.Role, String.Join(", ", resultQuery)),
-
+                    //new Claim(ClaimTypes.Role, role.RoleName.ToString())
+                    new Claim(ClaimTypes.Role, String.Join(", ", resultQuery))
                  }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
