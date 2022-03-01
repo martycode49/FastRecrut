@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FastRecrut.Web.ViewModels.QuizViewModel>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        <a asp-action="Index" asp-route-sortOrder=
+                           "@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Subject)</a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubSubject)
+                    </th>
+                    <th>
+                        <a asp-action="Index" asp-route-sortOrder=
+                           "@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Level)</a>
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubSubject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>

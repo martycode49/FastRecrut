@@ -58,5 +58,6 @@ namespace FastRecrut.DataAccess.Concrete.EntityFramework
         {
             _FastRecrutDbContext.Quizzes.Update(quiz).State = EntityState.Modified;
         }
+
     }
 }

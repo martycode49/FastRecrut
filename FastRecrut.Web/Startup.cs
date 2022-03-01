@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FastRecrut.Web.Services.Abstract;
+using FastRecrut.Web.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +27,9 @@ namespace FastRecrut.Web
         {
             services.AddControllersWithViews();
             services.AddSession(); // Lancement service Session pour le token
+
+            // Services 
+            services.AddScoped<IQuizEditorService, QuizEditorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

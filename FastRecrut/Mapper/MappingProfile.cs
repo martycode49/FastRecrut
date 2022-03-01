@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FastRecrut.Api.Resources;
 using FastRecrut.Entities.Concrete;
+using FastRecrut.Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,6 @@ namespace MyMusic.API.Mapping
             //CreateMap<ComposerResourse,Composer >();
             //CreateMap<SaveComposerResource,Composer >();
             CreateMap<AgentResource,Agent >();
-
-
-
-
-
         }
 
     }
