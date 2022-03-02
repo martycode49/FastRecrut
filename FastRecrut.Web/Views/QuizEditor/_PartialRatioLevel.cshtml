@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FastRecrut.Web.ViewModels.RatioViewModel>
+
+@{
+    ViewData["Title"] = "_PartialRatioLevel";
+}
+
+<h2>Ratio</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Junior
+            </th>
+            <th>
+                Confirmé
+            </th>
+            <th>
+                Expert
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Junior)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Confirme)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

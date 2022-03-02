@@ -12,6 +12,7 @@ namespace FastRecrut.Web.Services.Abstract
 
         //Basic repository example used in Repo Controller
         Task<List<QuizViewModel>> GetAllQuizAsync();
+        public int[] GetRatioLevel();
 
     }
 }

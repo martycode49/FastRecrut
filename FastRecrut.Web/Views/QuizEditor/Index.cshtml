@@ -1,48 +1,86 @@
-﻿@model IEnumerable<FastRecrut.Web.ViewModels.QuizViewModel>
+﻿@using FastRecrut.Web.Helpers;
+@model PaginatedList<FastRecrut.Web.ViewModels.QuizViewModel>
 
-    @{
-        ViewData["Title"] = "Index";
-    }
 
-    <h2>Index</h2>
+@{
+    ViewData["Title"] = "Index";
+}
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                    <th>
-                        <a asp-action="Index" asp-route-sortOrder=
-                           "@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Subject)</a>
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SubSubject)
-                    </th>
-                    <th>
-                        <a asp-action="Index" asp-route-sortOrder=
-                           "@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Level)</a>
-                    </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubSubject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Level)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>
+<h2>Quiz sorting/filter function</h2>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Subject or Question name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SubjSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Subject</a>
+            </th>
+            <th>
+                SubSubject
+            </th>
+            <th>
+                Question
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LevelSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Level</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSelected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubSubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            @*<td>
+            <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
+        </td>*@
+        </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

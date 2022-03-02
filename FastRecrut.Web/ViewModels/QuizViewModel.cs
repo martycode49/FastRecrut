@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using FastRecrut.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -23,5 +24,21 @@ namespace FastRecrut.Web.ViewModels
         public int ValidQuestion { get; set; }
         public string CommentFalse { get; set; }
 
+        // Extra property
+        public bool IsSelected { get; set; }
+    }
+    public class MyDocument
+    {
+        public string ConfigLevel { get; set; }
+        public Subject Subject { get; set; }
+
+        [XmlArray]
+        [XmlArrayItem(ElementName = "MyListItem")]
+        public List<int> MyList { get; set; }
+    }
+    public class Subject
+    {
+        [XmlAttribute("value")]
+        public string Value { get; set; }
     }
 }
