@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FastRecrut.Web.ViewModels.RatioViewModel>
 
 @{
-    ViewData["Title"] = "_PartialRatioLevel";
+    await Html.RenderPartialAsync("_PartialRatioLevel");
 }
 
 <h2>Ratio</h2>
@@ -25,10 +25,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Junior)
+                    @Html.DisplayFor(modelItem => item.Junior))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Confirme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expert)
                 </td>
             </tr>
         }

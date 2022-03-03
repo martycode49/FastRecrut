@@ -35,7 +35,7 @@ namespace FastRecrut.Web.Services.Concrete
             return new List<QuizViewModel>();
         }
 
-        public static int[] GetRatioLevel()
+        public int[] GetRatioLevel()
         {
             int[] LevelList = new int[] { 80,10,10 }; // keep order junior; confirmé, expert 
 
@@ -56,5 +56,6 @@ namespace FastRecrut.Web.Services.Concrete
             }
             return LevelList;
         }
+
     }
 }
