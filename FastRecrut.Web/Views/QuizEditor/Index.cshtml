@@ -7,22 +7,50 @@
 }
 <section id="container">
     <div class="row">
-        <div class="col-lg-6 main-chart">
+        <div class="col-md-4 col-sm-4 mb">
             <!--CUSTOM CHART START -->
-            <div class="border-head">
-                <h3>USER VISITS</h3>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <div class="green-panel pn">
+                <div class="green-header">
+                    <h5>Ratio levels</h5>
+                </div>
+                <div class="progress" style="margin: 0px 10px">
+                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                </div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th>
+                                Junior
+                            </th>
+                            <th>
+                                Confirmé
+                            </th>
+                            <th>
+                                Expert
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    @ViewData["Junior"]%
+                                </td>
+                                <td>
+                                    @ViewData["Confirme"]%
+                                </td>
+                                <td>
+                                    @ViewData["Confirme"]%
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
             </div>
             <!--custom chart end-->
         </div>
     </div>
 </section>
-    @Html.PartialAsync("_PartialRatioLevel")
 
     <h2>Quiz sorting/filter function</h2>
 

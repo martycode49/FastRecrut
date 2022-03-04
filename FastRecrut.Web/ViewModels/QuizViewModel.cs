@@ -26,6 +26,7 @@ namespace FastRecrut.Web.ViewModels
 
         // Extra property
         public bool IsSelected { get; set; }
+        public RatioViewModel ratioView { get; set; }
     }
     public class MyDocument
     {
@@ -41,4 +42,6 @@ namespace FastRecrut.Web.ViewModels
         [XmlAttribute("value")]
         public string Value { get; set; }
     }
+
+
 }

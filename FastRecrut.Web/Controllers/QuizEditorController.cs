@@ -41,9 +41,12 @@ namespace FastRecrut.Web.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            PartialRatioLevel();
+            var ratio = _quizEditorService.GetRatioLevel();
+            ViewData["Junior"]   = ratio[0];
+            ViewData["Confirme"] = ratio[1];
+            ViewData["Expert"]   = ratio[2];
 
-            IEnumerable<QuizViewModel> quizList = await _quizEditorService.GetAllQuizAsync();
+            IEnumerable <QuizViewModel> quizList = await _quizEditorService.GetAllQuizAsync();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -69,19 +72,5 @@ namespace FastRecrut.Web.Controllers
             int pageSize = 10;
             return View(PaginatedList<QuizViewModel>.Create(quizList.AsQueryable(), pageNumber ?? 1, pageSize));
         }
-        /// <summary>
-        /// PartialRatioLevel
-        /// </summary>
-        /// <returns>object ratioViewModel</returns>
-        public object PartialRatioLevel()
-        {
-            var ratioViewModel = new RatioViewModel();
-            var ratio = _quizEditorService.GetRatioLevel();
-            ratioViewModel.Junior = ratio[0];
-            ratioViewModel.Confirme = ratio[1];
-            ratioViewModel.Expert = ratio[2];
-            return PartialView(ratioViewModel);
-        }
-        
     }
 }
